@@ -1,0 +1,73 @@
+from pydantic_settings import BaseSettings
+from pydantic import ConfigDict
+from pathlib import Path
+
+
+class DBSettings(BaseSettings):
+    DB_USER: str = "admin"
+    DB_PASSWORD: str = "admin"
+    DB_DATABASE: str = "postgres"
+    DB_HOST: str = "localhost"
+    DB_PORT: int = 5432
+
+    TEST_DB_USER: str = "admin"
+    TEST_DB_PASSWORD: str = "admin"
+    TEST_DB_DATABASE: str = "postgres"
+    TEST_DB_HOST: str = "localhost"
+    TEST_DB_PORT: int = 5432
+    DB_SCHEMA: str = "open_content"
+
+    @property
+    def sqlalchemy_postgresql_url(self):
+        return f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_DATABASE}"
+
+    @property
+    def test_sqlalchemy_postgresql_url(self):
+        return f"postgresql+psycopg://{self.TEST_DB_USER}:{self.TEST_DB_PASSWORD}@{self.TEST_DB_HOST}:{self.TEST_DB_PORT}/{self.DB_DATABASE}"
+
+    model_config = ConfigDict(extra="allow", env_file=".env")
+
+
+class RedisSettings(BaseSettings):
+    REDIS_USER: str | None = None
+    REDIS_PASSWORD: str | None = None
+    REDIS_DATABASE: int = 0
+    REDIS_HOST: str = "localhost"
+    REDIS_PORT: int = 6379
+
+    @property
+    def redis_url(self):
+        if self.REDIS_USER:
+            redis_user = self.REDIS_USER
+        else:
+            redis_user = ""
+        if self.REDIS_PASSWORD:
+            redis_password = self.REDIS_PASSWORD
+        else:
+            redis_password = ""
+        return f"redis://{redis_user}:{redis_password}@{self.REDIS_HOST}:{self.REDIS_PORT}/{self.REDIS_DATABASE}"
+
+    model_config = ConfigDict(extra="allow", env_file=".env")
+
+
+class GenericSettings(BaseSettings):
+    MODE: str = "production"
+    MEDIA_FOLDER: Path
+    ALLOWED_IMAGE_TYPES: list[str] = [
+        "image/jpeg",
+        "image/png",
+        "image/gif",
+        "image/webp",
+        "image/svg+xml",
+        "image/bmp",
+        "image/tiff",
+        "image/x-icon"
+    ]
+    MAX_UPLOAD_IMAGE_SIZE: int = 30
+
+    model_config = ConfigDict(extra="allow", env_file=".env")
+
+
+redis_settings = RedisSettings()
+db_settings = DBSettings()
+generic_settings = GenericSettings()
