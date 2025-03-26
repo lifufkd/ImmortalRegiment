@@ -25,6 +25,10 @@ class DBSettings(BaseSettings):
     def test_sqlalchemy_postgresql_url(self):
         return f"postgresql+psycopg://{self.TEST_DB_USER}:{self.TEST_DB_PASSWORD}@{self.TEST_DB_HOST}:{self.TEST_DB_PORT}/{self.DB_DATABASE}"
 
+    @property
+    def asyncpg_postgresql_url(self):
+        return f"postgresql://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_DATABASE}"
+
     model_config = ConfigDict(extra="allow", env_file=".env")
 
 
