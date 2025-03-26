@@ -1,8 +1,11 @@
-from sqlalchemy import update
+from sqlalchemy import update, select, func
+from fastapi_pagination import Page
+from fastapi_pagination.ext.sqlalchemy import paginate
 
-from src.schemas.heroes import Hero, AddHeroDTO, UpdateHeroDTO
+from src.schemas.heroes import AddHeroDTO, UpdateHeroDTO, FilterHero
 from src.models.heroes import Hero
 from src.database.postgresql import postgres_connector
+from src.utilities.types_storage import ModerationStatus
 
 
 async def hero_is_existed(hero_id: int) -> bool:
@@ -20,7 +23,7 @@ async def insert_hero(hero_data: AddHeroDTO) -> Hero:
     return hero_db_obj
 
 
-async def update_hero(hero_data: UpdateHeroDTO) -> Hero:
+async def update_hero(hero_data: UpdateHeroDTO) -> None:
     async with postgres_connector.session_factory() as session:
         query = (
             update(Hero)
@@ -28,15 +31,51 @@ async def update_hero(hero_data: UpdateHeroDTO) -> Hero:
             .values(
                 **hero_data.model_dump(exclude_none=True)
             )
-            .returning(Hero)
         )
-        raw_data = await session.execute(query)
-        result = raw_data.scalar()
+        await session.execute(query)
         await session.commit()
-
-    return result
 
 
 async def select_hero(hero_id: int) -> Hero:
     async with postgres_connector.session_factory() as session:
         return await session.get(Hero, hero_id)
+
+
+async def select_heroes(filter_query: FilterHero) -> Page[Hero]:
+    async with postgres_connector.session_factory() as session:
+        if filter_query.surname_first_letter is None:
+            query = (
+                select(Hero)
+                .filter(
+                    Hero.moderation_status == ModerationStatus.APPROVED
+                )
+                .filter_by(
+                    **filter_query.model_dump(exclude_none=True)
+                )
+            )
+        else:
+            query = (
+                select(Hero)
+                .filter(
+                    Hero.moderation_status == ModerationStatus.APPROVED,
+                    Hero.surname.startswith(filter_query.surname_first_letter)
+                )
+                .filter_by(
+                    **filter_query.model_dump(exclude_none=True, exclude={"surname_first_letter"})
+                )
+            )
+
+        return await paginate(session, query)
+
+
+async def select_random_heroes() -> Page[Hero]:
+    async with postgres_connector.session_factory() as session:
+        query = (
+            select(Hero)
+            .order_by(func.random())
+            .filter(
+                Hero.moderation_status == ModerationStatus.APPROVED
+            )
+        )
+
+        return await paginate(session, query)

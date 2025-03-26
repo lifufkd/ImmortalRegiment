@@ -1,12 +1,13 @@
 from fastapi import UploadFile
+from fastapi_pagination import Page
 
-from src.schemas.heroes import Hero, AddHero, AddHeroDTO, UpdateHeroDTO, File
-from src.repository.heroes import insert_hero, select_hero, update_hero
+from src.schemas.heroes import Hero, AddHero, AddHeroDTO, UpdateHeroDTO, File, FilterHero
+from src.repository.heroes import insert_hero, select_hero, update_hero, select_heroes, select_random_heroes
 from src.utilities.types_storage import ModerationStatus, MessagesTypes
 from src.validators.heroes import validate_hero_is_existed
 from src.validators.wars import validate_war_is_existed
 from src.validators.military_ranks import validate_military_rank_is_existed
-from src.utilities.exceptions_storage import HeroOnModeration
+from src.utilities.exceptions_storage import HeroOnModeration, FileNotFound
 from src.utilities.config import generic_settings
 from src.storage.local import FileManager
 
@@ -35,7 +36,7 @@ async def create_hero(hero_data: AddHero, hero_photo: UploadFile | None) -> Hero
     )
 
     if hero_photo is None:
-        new_hero = await insert_hero(hero_data=hero_dto)
+        new_hero_obj = await insert_hero(hero_data=hero_dto)
     else:
         hero_photo_obj = File(
             file_data=await hero_photo.read(),
@@ -43,24 +44,48 @@ async def create_hero(hero_data: AddHero, hero_photo: UploadFile | None) -> Hero
             file_type=hero_photo.content_type
         )
         await validate_image()
-        new_hero = await insert_hero(hero_data=hero_dto)
-        file_name = f"{new_hero.hero_id}.{hero_photo_obj.file_name.split('.')[-1]}"
+        new_hero_obj = await insert_hero(hero_data=hero_dto)
+        file_name = f"{new_hero_obj.hero_id}.{hero_photo_obj.file_name.split('.')[-1]}"
 
         hero_photo_dto_obj = UpdateHeroDTO(
-            hero_id=new_hero.hero_id,
+            hero_id=new_hero_obj.hero_id,
             photo_name=file_name,
             photo_type=hero_photo_obj.file_type
         )
-        new_hero = await update_hero(hero_data=hero_photo_dto_obj)
+        await update_hero(hero_data=hero_photo_dto_obj)
         await save_media_to_file()
 
-    return new_hero
+        new_hero_obj = await select_hero(hero_id=new_hero_obj.hero_id)
+
+    return new_hero_obj
 
 
-async def get_hero(hero_id: int) -> Hero:
+async def fetch_hero(hero_id: int) -> Hero:
     await validate_hero_is_existed(hero_id=hero_id)
     hero_obj = await select_hero(hero_id=hero_id)
     if hero_obj.moderation_status != ModerationStatus.APPROVED:
         raise HeroOnModeration(hero_id=hero_id)
 
     return await select_hero(hero_id=hero_id)
+
+
+async def fetch_heroes(filter_query: FilterHero) -> Page[Hero]:
+    return await select_heroes(filter_query=filter_query)
+
+
+async def fetch_random_heroes() -> Page[Hero]:
+    return await select_random_heroes()
+
+
+async def get_hero_photo(hero_id: int) -> dict[str, any]:
+    await validate_hero_is_existed(hero_id=hero_id)
+
+    hero_obj = await select_hero(hero_id=hero_id)
+    filepath = generic_settings.MEDIA_FOLDER / f"{hero_obj.photo_name}"
+    if not await FileManager().file_exists(file_path=filepath):
+        raise FileNotFound()
+
+    return {
+        "file_path": filepath,
+        "file_type": hero_obj.photo_type
+    }

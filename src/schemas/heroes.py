@@ -75,3 +75,11 @@ class File(BaseModel):
     file_data: bytes
     file_name: str
     file_type: str
+
+
+class FilterHero(BaseModel):
+    surname_first_letter: Annotated[Optional[str], Field(None)]
+    war_id: Annotated[Optional[int], Field(None)]
+    military_rank_id: Annotated[Optional[int], Field(None)]
+    birth_date: Annotated[Optional[date], Field(None)]
+    death_date: Annotated[Optional[date], Field(None)]
