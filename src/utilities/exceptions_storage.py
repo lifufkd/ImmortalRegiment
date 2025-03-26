@@ -80,3 +80,9 @@ class ImageCorrupted(Exception):
         super().__init__(detail)
 
 
+class FileNotFound(Exception):
+    def __init__(self):
+        detail = "File not found"
+        super().__init__(detail)
+
+
