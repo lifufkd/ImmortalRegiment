@@ -11,6 +11,15 @@ class HeroNotFound(Exception):
         super().__init__(detail)
 
 
+class HeroOnModeration(Exception):
+    def __init__(self, hero_id: int):
+        if hero_id is None:
+            detail = "Hero on moderation"
+        else:
+            detail = f"Hero with id {hero_id} on moderation"
+        super().__init__(detail)
+
+
 class WarNotFound(Exception):
     def __init__(self, war_id: int | None):
         if war_id is None:
