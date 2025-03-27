@@ -3,6 +3,7 @@ from fastapi import FastAPI, status
 from fastapi.responses import JSONResponse
 from contextlib import asynccontextmanager
 from fastapi_pagination import add_pagination
+from slowapi import _rate_limit_exceeded_handler
 
 from src.repository.init_db import create_tables, create_schema
 from src.routes.heroes import heroes_router
@@ -22,6 +23,7 @@ from src.storage.local import FileManager
 from src.triggers.triggers import setup_hero_delete_trigger
 from src.triggers.listeners import setup_user_delete_listener
 from src.utilities.data_importer import DataImporter
+from src.limiter.limiter import limiter
 
 
 @asynccontextmanager
@@ -42,6 +44,9 @@ app = FastAPI(
     version="1.0.0",
     lifespan=lifespan
 )
+
+app.state.limiter = limiter
+app.add_exception_handler(429, _rate_limit_exceeded_handler)
 
 
 @app.exception_handler(Exception)
