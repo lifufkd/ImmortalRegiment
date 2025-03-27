@@ -17,7 +17,7 @@ class DataImporter:
         existed_wars_objs = await select_wars()
         existed_wars_titles = [war.title for war in existed_wars_objs]
 
-        with open(str(generic_settings.WARS_DATA_PATH), "r") as f:
+        with open(str(generic_settings.WARS_DATA_PATH), "r", encoding="utf-8") as f:
             wars_data = json.loads(f.read())
 
         for war in wars_data:
@@ -38,7 +38,7 @@ class DataImporter:
         existed_military_ranks_objs = await select_military_ranks()
         existed_military_ranks_titles = [existed_military.title for existed_military in existed_military_ranks_objs]
 
-        with open(str(generic_settings.MILITARY_RANKS_DATA_PATH), "r") as f:
+        with open(str(generic_settings.MILITARY_RANKS_DATA_PATH), "r", encoding="utf-8") as f:
             military_ranks_data = json.loads(f.read())
 
         for military_ranks in military_ranks_data:
