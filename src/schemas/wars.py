@@ -2,5 +2,9 @@ from pydantic import BaseModel
 
 
 class War(BaseModel):
-    id: int
+    war_id: int
+    title: str
+
+
+class AddWar(BaseModel):
     title: str

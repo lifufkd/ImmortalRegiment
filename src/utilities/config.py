@@ -56,6 +56,8 @@ class RedisSettings(BaseSettings):
 
 class GenericSettings(BaseSettings):
     MODE: str = "production"
+    WARS_DATA_PATH: Path
+    MILITARY_RANKS_DATA_PATH: Path
     MEDIA_FOLDER: Path
     ALLOWED_IMAGE_TYPES: list[str] = [
         "image/jpeg",

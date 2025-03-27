@@ -82,6 +82,8 @@ async def get_hero_photo(hero_id: int) -> dict[str, any]:
 
     hero_obj = await select_hero(hero_id=hero_id)
     filepath = generic_settings.MEDIA_FOLDER / f"{hero_obj.photo_name}"
+    if hero_obj.moderation_status != ModerationStatus.APPROVED:
+        raise HeroOnModeration(hero_id=hero_id)
     if not await FileManager().file_exists(file_path=filepath):
         raise FileNotFound()
 

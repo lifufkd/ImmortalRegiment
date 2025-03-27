@@ -1,4 +1,4 @@
-from sqlalchemy import update, select, func
+from sqlalchemy import update, select, func, delete
 from fastapi_pagination import Page
 from fastapi_pagination.ext.sqlalchemy import paginate
 
@@ -79,3 +79,27 @@ async def select_random_heroes() -> Page[Hero]:
         )
 
         return await paginate(session, query)
+
+
+async def delete_pending_heroes() -> None:
+    async with postgres_connector.session_factory() as session:
+        query = (
+            delete(Hero)
+            .filter(
+                Hero.moderation_status == ModerationStatus.PENDING
+            )
+        )
+        await session.execute(query)
+        await session.commit()
+
+
+async def delete_rejected_heroes() -> None:
+    async with postgres_connector.session_factory() as session:
+        query = (
+            delete(Hero)
+            .filter(
+                Hero.moderation_status == ModerationStatus.REJECTED
+            )
+        )
+        await session.execute(query)
+        await session.commit()

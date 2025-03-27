@@ -6,6 +6,8 @@ from fastapi_pagination import add_pagination
 
 from src.repository.init_db import create_tables, create_schema
 from src.routes.heroes import heroes_router
+from src.routes.military_ranks import military_ranks_router
+from src.routes.wars import wars_router
 from src.utilities.exceptions_storage import (
     HeroNotFound,
     WarNotFound,
@@ -19,6 +21,7 @@ from src.utilities.exceptions_storage import (
 from src.storage.local import FileManager
 from src.triggers.triggers import setup_hero_delete_trigger
 from src.triggers.listeners import setup_user_delete_listener
+from src.utilities.data_importer import DataImporter
 
 
 @asynccontextmanager
@@ -28,6 +31,8 @@ async def lifespan(_: FastAPI):
     await setup_hero_delete_trigger()
     asyncio.create_task(setup_user_delete_listener())
     FileManager.create_folders_structure()
+    await DataImporter.import_wars()
+    await DataImporter.import_military_ranks()
     yield
 
 
@@ -84,5 +89,7 @@ async def exception_handler(request, exc: Exception) -> JSONResponse:
             )
 
 app.include_router(heroes_router)
+app.include_router(military_ranks_router)
+app.include_router(wars_router)
 
 add_pagination(app)

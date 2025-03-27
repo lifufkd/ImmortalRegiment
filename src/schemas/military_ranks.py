@@ -2,5 +2,9 @@ from pydantic import BaseModel
 
 
 class MilitaryRank(BaseModel):
-    id: int
+    military_rank_id: int
+    title: str
+
+
+class AddMilitaryRank(BaseModel):
     title: str

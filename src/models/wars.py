@@ -9,4 +9,4 @@ from src.utilities.types_storage import (
 class War(OrmBase):
     __tablename__ = 'war'
     war_id: Mapped[primary_key_type]
-    title: Mapped[str] = mapped_column(nullable=False, index=True)
+    title: Mapped[str] = mapped_column(nullable=False, unique=True)
