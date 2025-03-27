@@ -13,7 +13,7 @@ heroes_router = APIRouter(
 
 
 @heroes_router.post("/", status_code=status.HTTP_201_CREATED, response_model=Hero)
-@limiter.limit("2/minute")
+@limiter.limit("1/minute")
 async def add_hero(
         request: Request,
         hero_data: AddHero = Depends(),
