@@ -1,10 +1,10 @@
-from fastapi import APIRouter, UploadFile, File, Depends, Query
+from fastapi import APIRouter, UploadFile, File, Depends, Query, status, Request
 from fastapi.responses import StreamingResponse
-from fastapi import status
 from fastapi_pagination import Page
 
 from src.schemas.heroes import Hero, AddHero, FilterHero
 from src.services.heroes import create_hero, fetch_hero, get_hero_photo, fetch_heroes, fetch_random_heroes
+from src.limiter.limiter import limiter
 
 heroes_router = APIRouter(
     tags=["Heroes"],
@@ -13,11 +13,13 @@ heroes_router = APIRouter(
 
 
 @heroes_router.post("/", status_code=status.HTTP_201_CREATED, response_model=Hero)
+@limiter.limit("2/minute")
 async def add_hero(
-        request: AddHero = Depends(),
+        request: Request,
+        hero_data: AddHero = Depends(),
         photo: UploadFile = File(None)
 ):
-    return await create_hero(hero_data=request, hero_photo=photo)
+    return await create_hero(hero_data=hero_data, hero_photo=photo)
 
 
 @heroes_router.get("/", response_model=Page[Hero])
