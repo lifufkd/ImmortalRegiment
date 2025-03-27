@@ -39,6 +39,3 @@ class Hero(OrmBase):
 
     moderation_status: Mapped[ModerationStatus] = mapped_column(nullable=False)
     created_at: Mapped[datetime_auto_set] = mapped_column(nullable=False)
-
-    war: Mapped["War"] = relationship()
-    military_rank: Mapped["MilitaryRank"] = relationship()
