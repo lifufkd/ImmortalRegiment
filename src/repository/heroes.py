@@ -36,6 +36,19 @@ async def update_hero(hero_data: UpdateHeroDTO) -> None:
         await session.commit()
 
 
+async def update_hero_moderation_status(hero_id: int, new_moderation_status: ModerationStatus) -> None:
+    async with postgres_connector.session_factory() as session:
+        query = (
+            update(Hero)
+            .filter_by(hero_id=hero_id)
+            .values(
+                moderation_status=new_moderation_status
+            )
+        )
+        await session.execute(query)
+        await session.commit()
+
+
 async def select_hero(hero_id: int) -> Hero:
     async with postgres_connector.session_factory() as session:
         return await session.get(Hero, hero_id)
