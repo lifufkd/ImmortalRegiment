@@ -1,8 +1,9 @@
 from sqlalchemy import update, select, func, delete
+from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi_pagination import Page
 from fastapi_pagination.ext.sqlalchemy import paginate
 
-from src.schemas.heroes import AddHeroDTO, UpdateHeroDTO, FilterHero
+from src.schemas.heroes import AddHeroDTO, FilterHero
 from src.models.heroes import Hero
 from src.database.postgresql import postgres_connector
 from src.utilities.types_storage import ModerationStatus
@@ -23,17 +24,11 @@ async def insert_hero(hero_data: AddHeroDTO) -> Hero:
     return hero_db_obj
 
 
-async def update_hero(hero_data: UpdateHeroDTO) -> None:
-    async with postgres_connector.session_factory() as session:
-        query = (
-            update(Hero)
-            .filter_by(hero_id=hero_data.hero_id)
-            .values(
-                **hero_data.model_dump(exclude_none=True)
-            )
-        )
-        await session.execute(query)
-        await session.commit()
+async def insert_hero_draft(hero_data: AddHeroDTO, session: AsyncSession) -> Hero:
+    hero_obj = Hero(**hero_data.model_dump(exclude_none=True))
+    session.add(hero_obj)
+    await session.flush()
+    return hero_obj
 
 
 async def update_hero_moderation_status(hero_id: int, new_moderation_status: ModerationStatus) -> None:
