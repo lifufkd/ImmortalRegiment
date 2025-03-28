@@ -3,16 +3,18 @@
 #               SBR                 #
 #####################################
 import asyncio
-from pathlib import Path
 from telebot.async_telebot import AsyncTeleBot
 
 from src.utilities.config import generic_settings
 from src.repository.heroes import select_hero, hero_is_existed
 from src.broker.redis import RedisBroker
 from src.storage.local import FileManager
+from src.repository.heroes import update_hero_moderation_status
 from src.repository.wars import select_war_by_id
 from src.repository.military_ranks import select_military_rank_by_id
 from tg_bot.buttons import BotButtons
+from utilities.types_storage import ModerationStatus
+
 #####################################
 
 
@@ -20,10 +22,7 @@ bot = AsyncTeleBot(generic_settings.TG_BOT_TOKEN)
 
 
 async def null_wrapper(data: any) -> any:
-    if data is None:
-        return "Не указано"
-    else:
-        return data
+    return "Не указано" if data is None else data
 
 
 def split_string(s: str, max_length: int) -> list[str]:
@@ -68,23 +67,22 @@ async def application_events_handler():
 
             if hero_obj.photo_name is not None:
                 photo_obj = await file_manager.read_file(generic_settings.MEDIA_FOLDER / hero_obj.photo_name)
-                splited_msg = split_string(s=msg, max_length=1024)
-                for index, chunk in enumerate(splited_msg):
-                    if len(splited_msg) == 1:
+                split_msg = split_string(s=msg, max_length=1024)
+                for index, chunk in enumerate(split_msg):
+                    if len(split_msg) == 1:
                         await bot.send_photo(generic_settings.TG_BOT_ADMIN, photo_obj, caption=chunk,
                                              reply_markup=bot_buttons.hero(hero_id=new_hero_id))
+                    elif index == 0:
+                        await bot.send_photo(generic_settings.TG_BOT_ADMIN, photo_obj, caption=chunk)
+                    elif index == len(split_msg) - 1:
+                        await bot.send_message(generic_settings.TG_BOT_ADMIN, chunk,
+                                               reply_markup=bot_buttons.hero(hero_id=new_hero_id))
                     else:
-                        if index == 0:
-                            await bot.send_photo(generic_settings.TG_BOT_ADMIN, photo_obj, caption=chunk)
-                        elif index == len(splited_msg) - 1:
-                            await bot.send_message(generic_settings.TG_BOT_ADMIN, chunk,
-                                                   reply_markup=bot_buttons.hero(hero_id=new_hero_id))
-                        else:
-                            await bot.send_message(generic_settings.TG_BOT_ADMIN, chunk)
+                        await bot.send_message(generic_settings.TG_BOT_ADMIN, chunk)
             else:
-                splited_msg = split_string(s=msg, max_length=4096)
-                for index, chunk in enumerate(splited_msg):
-                    if index == len(splited_msg) - 1:
+                split_msg = split_string(s=msg, max_length=4096)
+                for index, chunk in enumerate(split_msg):
+                    if index == len(split_msg) - 1:
                         await bot.send_message(generic_settings.TG_BOT_ADMIN, chunk, reply_markup=bot_buttons.hero(hero_id=new_hero_id))
                     else:
                         await bot.send_message(generic_settings.TG_BOT_ADMIN, chunk)
@@ -104,15 +102,31 @@ async def start_msg(message):
             await bot.send_message(user_id, "Бот не функционирует")
 
 
-# @bot.callback_query_handler(func=lambda call: True)
-# def callback(call):
-#     command = call.data
-#     user_id = call.message.chat.id
-#
-#     if "product" in command:
-#         temp_user_data.set_config_data(user_id, "index", 0)
-#         temp_user_data.set_config_data(user_id, "product_index", command[7:])
-#         bot.send_message(user_id, "Введите ваше имя: ")
+@bot.callback_query_handler(func=lambda call: True)
+async def callback(call):
+    command = call.data
+    message_id = call.message.message_id
+    user_id = call.message.chat.id
+
+    if user_id != generic_settings.TG_BOT_ADMIN:
+        return None
+
+    if "accept" in command:
+        await update_hero_moderation_status(hero_id=int(command[6:]), new_moderation_status=ModerationStatus.APPROVED.name)
+        status = "\n\n Заявка была подтверждена"
+    elif "reject" in command:
+        await update_hero_moderation_status(hero_id=int(command[6:]), new_moderation_status=ModerationStatus.REJECTED.name)
+        status = "\n\n Заявка была отклонена"
+    else:
+        return None
+
+    if call.message.photo:
+        await bot.edit_message_caption(call.message.caption + status,
+                                       generic_settings.TG_BOT_ADMIN, message_id)
+    else:
+        await bot.edit_message_text(call.message.text + status, generic_settings.TG_BOT_ADMIN,
+                                    message_id)
+
 
 
 async def main():
