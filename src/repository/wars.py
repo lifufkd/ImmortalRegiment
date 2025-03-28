@@ -30,3 +30,15 @@ async def insert_wars(wars_data: list[AddWar]) -> None:
 
         session.add_all(wars_objs)
         await session.commit()
+
+
+async def select_war_by_id(war_id: int) -> War:
+    async with postgres_connector.session_factory() as session:
+        query = (
+            select(War)
+            .filter_by(war_id=war_id)
+        )
+        raw_data = await session.execute(query)
+        war_data = raw_data.scalar()
+
+    return war_data

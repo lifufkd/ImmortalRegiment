@@ -30,3 +30,15 @@ async def insert_military_ranks(military_ranks_data: list[AddMilitaryRank]) -> N
 
         session.add_all(military_ranks_objs)
         await session.commit()
+
+
+async def select_military_rank_by_id(military_rank_id: int) -> MilitaryRank:
+    async with postgres_connector.session_factory() as session:
+        query = (
+            select(MilitaryRank)
+            .filter_by(military_rank_id=military_rank_id)
+        )
+        raw_data = await session.execute(query)
+        military_rank_data = raw_data.scalar()
+
+    return military_rank_data
