@@ -20,8 +20,8 @@ from src.utilities.exceptions_storage import (
     ImageCorrupted
 )
 from src.storage.local import FileManager
-from src.triggers.triggers import setup_hero_delete_trigger
-from src.triggers.listeners import setup_user_delete_listener
+from src.triggers.triggers import setup_hero_delete_trigger, setup_hero_insert_trigger
+from src.triggers.listeners import setup_user_delete_listener, setup_user_insert_listener
 from src.utilities.data_importer import DataImporter
 from src.limiter.limiter import limiter
 
@@ -31,7 +31,9 @@ async def lifespan(_: FastAPI):
     await create_schema()
     await create_tables()
     await setup_hero_delete_trigger()
+    await setup_hero_insert_trigger()
     asyncio.create_task(setup_user_delete_listener())
+    asyncio.create_task(setup_user_insert_listener())
     FileManager.create_folders_structure()
     await DataImporter.import_wars()
     await DataImporter.import_military_ranks()
