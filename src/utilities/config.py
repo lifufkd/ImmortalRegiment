@@ -35,7 +35,6 @@ class DBSettings(BaseSettings):
 class RedisSettings(BaseSettings):
     REDIS_USER: str | None = None
     REDIS_PASSWORD: str | None = None
-    REDIS_DATABASE: int = 0
     REDIS_HOST: str = "localhost"
     REDIS_PORT: int = 6379
 
@@ -102,6 +101,9 @@ class GenericSettings(BaseSettings):
     MAX_UPLOAD_FILE_SIZE: int = 16384
     CHUNK_SIZE: int = 16
     MAX_ITEMS_PER_REQUEST: int = 100
+
+    TG_BOT_TOKEN: str
+    TG_BOT_ADMIN: int
 
     model_config = ConfigDict(extra="allow", env_file=".env")
 
