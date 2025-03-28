@@ -49,15 +49,16 @@ async def create_hero(hero_data: AddHero, hero_photo: UploadFile | None) -> Hero
             await validate_image()
 
             new_hero_obj = await insert_hero_draft(hero_data=hero_dto, session=session)
+            hero_id = new_hero_obj.hero_id
 
-            file_name = f"{new_hero_obj.hero_id}.{hero_photo_obj.file_name.split('.')[-1]}"
+            file_name = f"{hero_id}.{hero_photo_obj.file_name.split('.')[-1]}"
             new_hero_obj.photo_name = file_name
             new_hero_obj.photo_type = hero_photo_obj.file_type
 
             await session.commit()
             await save_media_to_file(photo_name=file_name)
 
-            new_hero_obj = await select_hero(hero_id=new_hero_obj.hero_id)
+            new_hero_obj = await select_hero(hero_id=hero_id)
 
     return new_hero_obj
 
