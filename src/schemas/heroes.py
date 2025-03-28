@@ -29,18 +29,18 @@ class HeroDTO(Hero):
 
 
 class AddHero(BaseModel):
-    name: str
-    surname: str
-    patronymic: Annotated[Optional[str], Field(None)]
+    name: Annotated[str, Field(min_length=1, max_length=64)]
+    surname: Annotated[str, Field(min_length=1, max_length=64)]
+    patronymic: Annotated[Optional[str], Field(None, min_length=1, max_length=64)]
     birth_date: Annotated[Optional[date], Field(None)]
     death_date: Annotated[Optional[date], Field(None)]
-    birth_place: Annotated[Optional[str], Field(None)]
+    birth_place: Annotated[Optional[str], Field(None, min_length=1, max_length=256)]
     war_id: int
     military_rank_id: Annotated[Optional[int], Field(None)]
-    military_specialty: Annotated[Optional[str], Field(None)]
+    military_specialty: Annotated[Optional[str], Field(None, min_length=1, max_length=128)]
     enlistment_date: Annotated[Optional[date], Field(None)]
     discharge_date: Annotated[Optional[date], Field(None)]
-    additional_information: Annotated[Optional[str], Field(None)]
+    additional_information: Annotated[Optional[str], Field(None, min_length=1, max_length=500)]
 
 
 class AddHeroDTO(AddHero):
