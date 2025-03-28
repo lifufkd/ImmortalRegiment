@@ -3,7 +3,7 @@ from celery.schedules import crontab
 from src.utilities.config import redis_settings
 
 
-broker_url = f'redis://{redis_settings.REDIS_HOST}:{redis_settings.REDIS_PORT}/{redis_settings.REDIS_DATABASE}'
+broker_url = f'redis://{redis_settings.REDIS_HOST}:{redis_settings.REDIS_PORT}/0'
 worker_pool = 'celery_aio_pool.pool:AsyncIOPool'
 timezone = "Europe/Moscow"
 accept_content = ['json']
