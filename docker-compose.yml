@@ -1,0 +1,98 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file: .env
+    environment:
+      - WARS_DATA_PATH=/app/wars.json
+      - MILITARY_RANKS_DATA_PATH=/app/military_ranks.json
+      - DB_HOST=postgres
+      - REDIS_HOST=redis
+    volumes:
+      - app_data:${MEDIA_FOLDER:-/app/data}
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - backend
+    command: ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+#  tg_bot:
+#    build:
+#      context: ./backend
+#      dockerfile: Dockerfile
+#    restart: unless-stopped
+#    env_file: .env
+#    environment:
+#      - DB_HOST=postgres
+#      - REDIS_HOST=redis
+#    command: ["python", "bot.py"]
+#    depends_on:
+#      - backend
+#      - redis
+#      - postgres
+#    networks:
+#      - backend
+#  celery_worker:
+#    build:
+#      context: ./backend
+#      dockerfile: Dockerfile
+#    restart: always
+#    env_file: .env
+#    environment:
+#      - DB_HOST=postgres
+#      - REDIS_HOST=redis
+#    command: ["celery", "-A", "celery", "worker", "--loglevel=INFO"]
+#    depends_on:
+#      - backend
+#      - redis
+#      - postgres
+#    networks:
+#      - backend
+#  celery_beat:
+#    build:
+#      context: ./backend
+#      dockerfile: Dockerfile
+#    restart: always
+#    env_file: .env
+#    environment:
+#      - DB_HOST=postgres
+#      - REDIS_HOST=redis
+#    command: ["celery", "-A", "celery", "beat", "--loglevel=INFO"]
+#    depends_on:
+#      - backend
+#      - redis
+#      - postgres
+#    networks:
+#      - backend
+
+  postgres:
+    image: postgres:13
+    restart: always
+    environment:
+      - POSTGRES_USER=${DB_USER:-admin}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-admin}
+      - POSTGRES_DB=${DB_DATABASE:-postgres}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - backend
+  redis:
+    image: redis:alpine
+    restart: always
+    volumes:
+      - redis_data:/data
+    networks:
+      - backend
+
+volumes:
+  postgres_data:
+  redis_data:
+  app_data:
+
+networks:
+  backend:
