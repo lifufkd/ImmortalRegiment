@@ -1,4 +1,4 @@
-from celery.celery import celery_app
+from celery_worker.worker import celery_app
 from api.repository.heroes import delete_pending_heroes, delete_rejected_heroes
 
 
