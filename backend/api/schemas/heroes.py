@@ -2,7 +2,7 @@ from pydantic import BaseModel, Field
 from datetime import datetime, date
 from typing import Optional, Annotated
 
-from backend.api.utilities.types_storage import ModerationStatus
+from api.utilities.types_storage import ModerationStatus
 
 
 class Hero(BaseModel):

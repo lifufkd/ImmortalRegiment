@@ -1,6 +1,6 @@
-from backend.api.storage.local import FileManager
-from backend.api.utilities.config import generic_settings
-from backend.api.broker.redis import RedisBroker
+from api.storage.local import FileManager
+from api.utilities.config import generic_settings
+from api.broker.redis import RedisBroker
 
 
 async def handle_hero_insert_changes(hero_id: str):

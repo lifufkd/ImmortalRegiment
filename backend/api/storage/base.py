@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from io import BytesIO
 from pathlib import Path
 
-from backend.api.utilities.types_storage import MessagesTypes
+from api.utilities.types_storage import MessagesTypes
 
 
 class BaseStorage(ABC):

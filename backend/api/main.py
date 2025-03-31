@@ -5,11 +5,11 @@ from contextlib import asynccontextmanager
 from fastapi_pagination import add_pagination
 from slowapi import _rate_limit_exceeded_handler
 
-from backend.api.repository.init_db import create_tables, create_schema
-from backend.api.routes.heroes import heroes_router
-from backend.api.routes.military_ranks import military_ranks_router
-from backend.api.routes.wars import wars_router
-from backend.api.utilities.exceptions_storage import (
+from api.repository.init_db import create_tables, create_schema
+from api.routes.heroes import heroes_router
+from api.routes.military_ranks import military_ranks_router
+from api.routes.wars import wars_router
+from api.utilities.exceptions_storage import (
     HeroNotFound,
     WarNotFound,
     MilitaryRankNotFound,
@@ -19,11 +19,11 @@ from backend.api.utilities.exceptions_storage import (
     FileNotFound,
     ImageCorrupted
 )
-from backend.api.storage.local import FileManager
-from backend.api.triggers.triggers import setup_hero_delete_trigger, setup_hero_insert_trigger
-from backend.api.triggers.listeners import setup_user_delete_listener, setup_user_insert_listener
-from backend.api.utilities.data_importer import DataImporter
-from backend.api.limiter.limiter import limiter
+from api.storage.local import FileManager
+from api.triggers.triggers import setup_hero_delete_trigger, setup_hero_insert_trigger
+from api.triggers.listeners import setup_user_delete_listener, setup_user_insert_listener
+from api.utilities.data_importer import DataImporter
+from api.limiter.limiter import limiter
 
 
 @asynccontextmanager

@@ -1,5 +1,5 @@
-from backend.celery.celery import celery_app
-from backend.api.repository.heroes import delete_pending_heroes, delete_rejected_heroes
+from celery.celery import celery_app
+from api.repository.heroes import delete_pending_heroes, delete_rejected_heroes
 
 
 @celery_app.task

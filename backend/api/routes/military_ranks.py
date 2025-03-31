@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-from backend.api.schemas.military_ranks import MilitaryRank
-from backend.api.repository.military_ranks import select_military_ranks
+from api.schemas.military_ranks import MilitaryRank
+from api.repository.military_ranks import select_military_ranks
 
 military_ranks_router = APIRouter(
     tags=["Military Ranks"],

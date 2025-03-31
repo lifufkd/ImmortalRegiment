@@ -3,10 +3,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi_pagination import Page
 from fastapi_pagination.ext.sqlalchemy import paginate
 
-from backend.api.schemas.heroes import AddHeroDTO, FilterHero
-from backend.api.models.heroes import Hero
-from backend.api.database.postgresql import postgres_connector
-from backend.api.utilities.types_storage import ModerationStatus
+from api.schemas.heroes import AddHeroDTO, FilterHero
+from api.models.heroes import Hero
+from api.database.postgresql import postgres_connector
+from api.utilities.types_storage import ModerationStatus
 
 
 async def hero_is_existed(hero_id: int) -> bool:

@@ -1,8 +1,8 @@
 from sqlalchemy import select
 
-from backend.api.models.military_ranks import MilitaryRank
-from backend.api.schemas.military_ranks import AddMilitaryRank
-from backend.api.database.postgresql import postgres_connector
+from api.models.military_ranks import MilitaryRank
+from api.schemas.military_ranks import AddMilitaryRank
+from api.database.postgresql import postgres_connector
 
 
 async def military_ranks_is_existed(military_ranks_id: int) -> bool:

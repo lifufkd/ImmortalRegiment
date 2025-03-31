@@ -1,5 +1,5 @@
-from backend.api.repository.heroes import hero_is_existed
-from backend.api.utilities.exceptions_storage import HeroNotFound
+from api.repository.heroes import hero_is_existed
+from api.utilities.exceptions_storage import HeroNotFound
 
 
 async def validate_hero_is_existed(hero_id: int) -> None:

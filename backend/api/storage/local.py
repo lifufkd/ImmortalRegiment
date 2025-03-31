@@ -3,8 +3,8 @@ from pathlib import Path
 
 from .base import BaseStorage
 from .utils import StorageUtils
-from backend.api.utilities.config import generic_settings
-from backend.api.utilities.types_storage import MessagesTypes
+from api.utilities.config import generic_settings
+from api.utilities.types_storage import MessagesTypes
 
 
 class FileManager(BaseStorage):

@@ -4,9 +4,9 @@ from typing import Union, Literal
 from pathlib import Path
 from io import BytesIO
 
-from backend.api.utilities.config import generic_settings
-from backend.api.utilities.types_storage import MessagesTypes
-from backend.api.utilities.exceptions_storage import ImageCorrupted, InvalidFileType, FIleToBig
+from api.utilities.config import generic_settings
+from api.utilities.types_storage import MessagesTypes
+from api.utilities.exceptions_storage import ImageCorrupted, InvalidFileType, FIleToBig
 
 
 class StorageUtils:

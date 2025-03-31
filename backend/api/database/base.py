@@ -3,7 +3,7 @@ from sqlalchemy import MetaData
 from sqlalchemy.ext.asyncio import AsyncSession, AsyncEngine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
 
-from utilities.config import db_settings
+from api.utilities.config import db_settings
 
 
 class DatabaseConnector(ABC):

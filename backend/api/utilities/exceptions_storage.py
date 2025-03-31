@@ -1,5 +1,5 @@
 from typing import Union, Literal
-from backend.api.utilities.types_storage import MessagesTypes
+from api.utilities.types_storage import MessagesTypes
 
 
 class HeroNotFound(Exception):

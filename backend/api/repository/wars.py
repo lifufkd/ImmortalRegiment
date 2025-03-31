@@ -1,8 +1,8 @@
 from sqlalchemy import select
 
-from backend.api.schemas.wars import AddWar
-from backend.api.models.wars import War
-from backend.api.database.postgresql import postgres_connector
+from api.schemas.wars import AddWar
+from api.models.wars import War
+from api.database.postgresql import postgres_connector
 
 
 async def war_is_existed(war_id: int) -> bool:

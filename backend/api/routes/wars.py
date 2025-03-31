@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-from backend.api.schemas.wars import War
-from backend.api.repository.wars import select_wars
+from api.schemas.wars import War
+from api.repository.wars import select_wars
 
 wars_router = APIRouter(
     tags=["Wars"],

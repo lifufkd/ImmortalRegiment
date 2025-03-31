@@ -1,16 +1,16 @@
 from fastapi import UploadFile
 from fastapi_pagination import Page
 
-from backend.api.schemas.heroes import Hero, AddHero, AddHeroDTO, File, FilterHero
-from backend.api.repository.heroes import insert_hero, select_hero, select_heroes, select_random_heroes, insert_hero_draft
-from backend.api.utilities.types_storage import ModerationStatus, MessagesTypes
-from backend.api.validators.heroes import validate_hero_is_existed
-from backend.api.validators.wars import validate_war_is_existed
-from backend.api.validators.military_ranks import validate_military_rank_is_existed
-from backend.api.utilities.exceptions_storage import HeroOnModeration, FileNotFound
-from backend.api.utilities.config import generic_settings
-from backend.api.storage.local import FileManager
-from backend.api.database.postgresql import postgres_connector
+from api.schemas.heroes import Hero, AddHero, AddHeroDTO, File, FilterHero
+from api.repository.heroes import insert_hero, select_hero, select_heroes, select_random_heroes, insert_hero_draft
+from api.utilities.types_storage import ModerationStatus, MessagesTypes
+from api.validators.heroes import validate_hero_is_existed
+from api.validators.wars import validate_war_is_existed
+from api.validators.military_ranks import validate_military_rank_is_existed
+from api.utilities.exceptions_storage import HeroOnModeration, FileNotFound
+from api.utilities.config import generic_settings
+from api.storage.local import FileManager
+from api.database.postgresql import postgres_connector
 
 
 async def create_hero(hero_data: AddHero, hero_photo: UploadFile | None) -> Hero:

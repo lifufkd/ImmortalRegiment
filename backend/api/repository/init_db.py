@@ -1,11 +1,11 @@
 from sqlalchemy import text
 
-from backend.api.database.postgresql import postgres_connector
-from backend.api.database.base import OrmBase
-from backend.api.utilities.config import db_settings
-import backend.api.models.wars # noqa
-import backend.api.models.heroes  # noqa
-import backend.api.models.military_ranks  # noqa
+from api.database.postgresql import postgres_connector
+from api.database.base import OrmBase
+from api.utilities.config import db_settings
+import api.models.wars # noqa
+import api.models.heroes  # noqa
+import api.models.military_ranks  # noqa
 
 
 async def create_schema() -> None:

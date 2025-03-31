@@ -2,9 +2,9 @@ from fastapi import APIRouter, UploadFile, File, Depends, Query, status, Request
 from fastapi.responses import StreamingResponse
 from fastapi_pagination import Page
 
-from backend.api.schemas.heroes import Hero, AddHero, FilterHero
-from backend.api.services.heroes import create_hero, fetch_hero, get_hero_photo, fetch_heroes, fetch_random_heroes
-from backend.api.limiter.limiter import limiter
+from api.schemas.heroes import Hero, AddHero, FilterHero
+from api.services.heroes import create_hero, fetch_hero, get_hero_photo, fetch_heroes, fetch_random_heroes
+from api.limiter.limiter import limiter
 
 heroes_router = APIRouter(
     tags=["Heroes"],

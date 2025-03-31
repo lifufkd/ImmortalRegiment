@@ -1,5 +1,5 @@
-from backend.api.repository.wars import war_is_existed
-from backend.api.utilities.exceptions_storage import WarNotFound
+from api.repository.wars import war_is_existed
+from api.utilities.exceptions_storage import WarNotFound
 
 
 async def validate_war_is_existed(war_id: int) -> None:

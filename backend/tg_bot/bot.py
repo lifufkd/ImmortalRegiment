@@ -5,15 +5,15 @@
 import asyncio
 from telebot.async_telebot import AsyncTeleBot
 
-from backend.api.utilities.config import generic_settings
-from backend.api.repository.heroes import select_hero, hero_is_existed
-from backend.api.broker.redis import RedisBroker
-from backend.api.storage.local import FileManager
-from backend.api.repository.heroes import update_hero_moderation_status
-from backend.api.repository.wars import select_war_by_id
-from backend.api.repository.military_ranks import select_military_rank_by_id
-from backend.tg_bot.buttons import BotButtons
-from backend.api.utilities.types_storage import ModerationStatus
+from api.utilities.config import generic_settings
+from api.repository.heroes import select_hero, hero_is_existed
+from api.broker.redis import RedisBroker
+from api.storage.local import FileManager
+from api.repository.heroes import update_hero_moderation_status
+from api.repository.wars import select_war_by_id
+from api.repository.military_ranks import select_military_rank_by_id
+from tg_bot.buttons import BotButtons
+from api.utilities.types_storage import ModerationStatus
 
 #####################################
 

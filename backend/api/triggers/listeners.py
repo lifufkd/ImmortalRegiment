@@ -2,7 +2,7 @@ import asyncio
 import asyncpg
 
 from .handlers import handle_hero_delete_changes, handle_hero_insert_changes
-from backend.api.utilities.config import db_settings
+from api.utilities.config import db_settings
 
 
 async def setup_user_delete_listener():

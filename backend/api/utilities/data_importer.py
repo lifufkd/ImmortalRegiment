@@ -1,10 +1,10 @@
 import json
 
 from .config import generic_settings
-from backend.api.schemas.wars import AddWar
-from backend.api.schemas.military_ranks import AddMilitaryRank
-from backend.api.repository.wars import select_wars, insert_wars
-from backend.api.repository.military_ranks import select_military_ranks, insert_military_ranks
+from api.schemas.wars import AddWar
+from api.schemas.military_ranks import AddMilitaryRank
+from api.repository.wars import select_wars, insert_wars
+from api.repository.military_ranks import select_military_ranks, insert_military_ranks
 
 
 class DataImporter:

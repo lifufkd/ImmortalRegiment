@@ -1,7 +1,7 @@
 from sqlalchemy import text
 
-from backend.api.database.postgresql import postgres_connector
-from backend.api.utilities.config import db_settings
+from api.database.postgresql import postgres_connector
+from api.utilities.config import db_settings
 
 
 async def setup_hero_insert_trigger():
