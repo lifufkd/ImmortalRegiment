@@ -21,22 +21,25 @@ services:
       - backend
     command: ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
 
-#  tg_bot:
-#    build:
-#      context: ./backend
-#      dockerfile: Dockerfile
-#    restart: unless-stopped
-#    env_file: .env
-#    environment:
-#      - DB_HOST=postgres
-#      - REDIS_HOST=redis
-#    command: ["python", "bot.py"]
-#    depends_on:
-#      - backend
-#      - redis
-#      - postgres
-#    networks:
-#      - backend
+  tg_bot:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - WARS_DATA_PATH=/app/wars.json
+      - MILITARY_RANKS_DATA_PATH=/app/military_ranks.json
+      - DB_HOST=postgres
+      - REDIS_HOST=redis
+    depends_on:
+      - backend
+      - redis
+      - postgres
+    networks:
+      - backend
+    command: ["python", "tg_bot/bot.py"]
+
 #  celery_worker:
 #    build:
 #      context: ./backend
