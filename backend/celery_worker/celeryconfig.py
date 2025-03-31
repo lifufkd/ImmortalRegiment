@@ -14,7 +14,7 @@ include = ["api.tasks.tasks"]
 beat_schedule = {
     'delete_pending_heroes_every_week': {
         'task': 'api.tasks.tasks.clean_pending_application',
-        'schedule': crontab(day_of_week="1")
+        'schedule': crontab(day_of_week="1", hour="0", minute="0")
     },
     'delete_rejected_heroes_every_day': {
         'task': 'api.tasks.tasks.clean_rejected_application',
