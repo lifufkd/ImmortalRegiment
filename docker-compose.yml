@@ -8,6 +8,7 @@ services:
       - "8000:8000"
     env_file: .env
     environment:
+      - PYTHONPATH=/app
       - WARS_DATA_PATH=/app/wars.json
       - MILITARY_RANKS_DATA_PATH=/app/military_ranks.json
       - DB_HOST=postgres
@@ -28,10 +29,13 @@ services:
     restart: unless-stopped
     env_file: .env
     environment:
+      - PYTHONPATH=/app
       - WARS_DATA_PATH=/app/wars.json
       - MILITARY_RANKS_DATA_PATH=/app/military_ranks.json
       - DB_HOST=postgres
       - REDIS_HOST=redis
+    volumes:
+      - app_data:${MEDIA_FOLDER:-/app/data}
     depends_on:
       - backend
       - redis
@@ -40,38 +44,38 @@ services:
       - backend
     command: ["python", "tg_bot/bot.py"]
 
-#  celery_worker:
-#    build:
-#      context: ./backend
-#      dockerfile: Dockerfile
-#    restart: always
-#    env_file: .env
-#    environment:
-#      - DB_HOST=postgres
-#      - REDIS_HOST=redis
-#    command: ["celery", "-A", "celery", "worker", "--loglevel=INFO"]
-#    depends_on:
-#      - backend
-#      - redis
-#      - postgres
-#    networks:
-#      - backend
-#  celery_beat:
-#    build:
-#      context: ./backend
-#      dockerfile: Dockerfile
-#    restart: always
-#    env_file: .env
-#    environment:
-#      - DB_HOST=postgres
-#      - REDIS_HOST=redis
-#    command: ["celery", "-A", "celery", "beat", "--loglevel=INFO"]
-#    depends_on:
-#      - backend
-#      - redis
-#      - postgres
-#    networks:
-#      - backend
+  celery_worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: always
+    env_file: .env
+    environment:
+      - DB_HOST=postgres
+      - REDIS_HOST=redis
+    depends_on:
+      - backend
+      - redis
+      - postgres
+    networks:
+      - backend
+    command: ["celery", "-A", "celery_worker.worker", "worker", "--loglevel=INFO"]
+  celery_beat:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: always
+    env_file: .env
+    environment:
+      - DB_HOST=postgres
+      - REDIS_HOST=redis
+    depends_on:
+      - backend
+      - redis
+      - postgres
+    networks:
+      - backend
+    command: ["celery", "-A", "celery_worker.worker", "beat", "--loglevel=INFO"]
 
   postgres:
     image: postgres:13
