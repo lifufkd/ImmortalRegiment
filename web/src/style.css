@@ -13,6 +13,7 @@
             background-attachment: fixed;
             overflow-x: hidden;
         }
+
 /* хедер */
 .container {
             width: 100% !important;
@@ -44,10 +45,11 @@
             font-size: 18px;
             letter-spacing: 6px;
             color: black ;
-            margin: 0px -11px; 
+            margin: 0px 3px; 
             pointer-events: none;
             user-select: none;
         }
+
 /* стили для навигации */
         .navbar-nav {
             margin-top: 10px;
@@ -57,7 +59,7 @@
             width: 100%;
         }
         .nav-link {
-            font-size: 25px;
+            font-size: 30px;
             position: relative;
             text-decoration: none;
         }
@@ -76,19 +78,21 @@
         .nav-link:hover::after {
             width: 100%;
         }
+
 /* все по лого */
         .logo {
             display: flex;
             align-items: center;
         }
         .logo img {
-            height: 150px;
+            height: 200px;
             margin-right: 10px;
         }
         .nav-link {
             color: black !important;
             font-weight: bold;
         }
+
 /*все по баннеру*/
     .banner {
             position: relative;
@@ -114,11 +118,11 @@
             border: 1px solid #F0E5D1; 
             color: #F0E5D1;
             padding: 15px 30px;
-            font-size: 24px;
+            font-size: 36px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 20px;
         }
         .banner-button::before,
         .banner-button::after {
@@ -128,19 +132,103 @@
             white-space: pre-line;
             line-height: 1;
         }
-/*карусель*/ 
-        .carousel-container {
-            width: 100%; /* Растягиваем на всю ширину страницы */
+
+/* Общий стиль для кнопок "ПЕРЕЙТИ" */
+        .custom-button {
+            background: none;
+            border: 1px solid #F0E5D1;
+            color: #F0E5D1;
+            padding: 15px 30px;
+            font-size: 36px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 30px;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-family: 'Vetrino', sans-serif;
+            transition: background 0.3s ease; 
+
+        }
+        .custom-button::before,
+        .custom-button::after {
+            content: "•\A•\A•";
+            font-size: 14px;
+            color: #F0E5D1;
+            white-space: pre-line;
+            line-height: 1;
+        }
+        .custom-button--dark-text {
+            border-color: #333; 
+            color: #333; 
+        }
+
+        .custom-button--dark-text::before,
+        .custom-button--dark-text::after {
+            color: #333; 
+        }
+
+/* Секция "История наших героев" */
+        .heroes-section {
+            width: 100%;
             text-align: center;
             position: relative;
-            margin: 0; /* Убираем автоматические отступы */
+            margin: 50px 0;
+            padding: 20px 20px;
+            background-image: url('assets/photo/bg-black.jpg'); 
+            background-size: cover; 
+            background-position: center; 
+            background-attachment: fixed; 
+            min-height: 400px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .heroes-section .heroes-title-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .heroes-header {
+            display: flex;
+            align-items: center; 
+            justify-content: flex-start; 
+            width: 100%;
+        }
+        .heroes-title {
+            font-family: 'Vetrino', sans-serif;
+            color: #F0E5D1;
+            text-transform: uppercase;
+            margin-right: 10px; 
+            white-space: nowrap;
+            font-size: 36px;
+        }
+        .dot-separator-heroes {
+            font-size: 18px;
+            letter-spacing: 8px;
+            color: #F0E5D1;
+            pointer-events: none;
+            user-select: none;
+            white-space: nowrap; 
+        }
+        .heroes-link {
+            margin-top: 20px;
+        }
+/*карусель*/ 
+        .carousel-container {
+            width: 100%; 
+            text-align: center;
+            position: relative;
+            margin: 0; 
             padding: 20px 20px;
 
         }
 
         .carousel {
             position: relative;
-            width: 100%; /* Растягиваем саму карусель */
+            width: 100%; 
             overflow: hidden;
         }
 
@@ -150,24 +238,24 @@
         }
 
         .carousel-slide {
-            min-width: 100%; /* Каждый слайд по-прежнему занимает всю ширину контейнера */
+            min-width: 100%; 
             box-sizing: border-box;
             display: flex;
             justify-content: space-between;
         }
 
         .carousel-slide img {
-            width: 32%; /* Изображения остаются пропорциональными, 3 в ряд */
+            width: 32%;
             height: auto;
             display: block;
-            filter: grayscale(100%); /* Изначально полностью черно-белые */
-            transition: filter 0.3s ease; /* Плавный переход для фильтра */
+            filter: sepia(70%); /* Применяем сепия-фильтр с интенсивностью 70% */
+            transition: filter 0.3s ease;
         }
 
         .carousel-slide img:hover {
-            filter: none; /* Убираем фильтр при наведении */
+            filter: sepia(20%) 
+            brightness(100%);
         }
-
         .carousel-button {
             position: absolute;
             top: 50%;
@@ -186,27 +274,20 @@
         }
 
         .carousel-button.prev {
-            left: 10px; /* Оставляем отступ от края */
+            left: 10px; 
         }
 
         .carousel-button.next {
-            right: 10px; /* Оставляем отступ от края */
+            right: 10px; 
         }
 
         .carousel-link {
             margin-top: 20px;
-            font-size: 16px;
-            text-transform: uppercase;
-            color: #333;
-            text-decoration: none;
-            border: 1px solid #333;
-            padding: 5px 20px;
-            display: inline-block;
+
         }
 
-        .carousel-link:hover {
-            background-color: #333;
-            color: white;
+        .carousel-title{
+            font-size: 36px;
         }
 /*футер*/
     .footer {   
@@ -323,6 +404,12 @@
                 max-width: 400px;
                 margin-bottom: 40px;
             }
+            .authors-title{
+                font-size: 25px;
+            }
+            .about-text{
+                font-size: 25px;
+            }
             .authors-text{
                 padding-left: 15px;
                 padding-right: 15px;
@@ -333,5 +420,5 @@
                 margin-top: 15px;
             }
             .logo-ft img {
-                width: 250px; /* Размер лого */
+                width: 250px; 
             }
