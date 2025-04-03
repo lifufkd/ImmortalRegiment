@@ -10,12 +10,12 @@ class DBSettings(BaseSettings):
     DB_HOST: str = "localhost"
     DB_PORT: int = 5432
 
-    TEST_DB_USER: str
-    TEST_DB_PASSWORD: str
+    TEST_DB_USER: str = "test"
+    TEST_DB_PASSWORD: str = "test"
     TEST_DB_DATABASE: str = "postgres"
     TEST_DB_HOST: str = "localhost"
     TEST_DB_PORT: int = 5432
-    DB_SCHEMA: str = "open_content"
+    DB_SCHEMA: str = "immortal-regiment"
 
     @property
     def sqlalchemy_postgresql_url(self):
