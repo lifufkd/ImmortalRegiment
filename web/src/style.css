@@ -136,9 +136,7 @@
             .about-page .footer {
                 margin-top: 0;
             }
-
-/* СТИЛИ ДЛЯ ГЛАВНОЙ СТРАНИЦЫ */
-    /* Контейнер формы */
+            /* Контейнер формы */
             .contact-form {
                 display: flex;
                 flex-direction: column;
@@ -201,6 +199,7 @@
                 cursor: pointer;
                 width: 30%;
                 white-space: nowrap;
+                border-radius: 0 !important;
             }
             .contact-form button:hover {
                 background: rgba(240, 229, 209, 0.2); 
@@ -222,6 +221,7 @@
             .authors-text{
                 padding-left: 15px;
                 padding-right: 15px;
+                padding-top: 15px;
                 border: 1px solid #F0E5D1;
             }
             .logo-ft {
@@ -231,6 +231,8 @@
             .logo-ft img {
                 width: 250px; 
             }
+
+/* СТИЛИ ДЛЯ ГЛАВНОЙ СТРАНИЦЫ */
             /*все по баннеру*/
     .banner {
             position: relative;
@@ -434,7 +436,7 @@
             width: 32%;
             height: auto;
             display: block;
-            filter: sepia(70%); /* Применяем сепия-фильтр с интенсивностью 70% */
+            filter: sepia(70%); 
             transition: filter 0.3s ease;
         }
 
@@ -490,7 +492,6 @@
             flex-direction: column;
         }
 
-        /* Карусель */
         .about-carousel {
             position: relative;
             width: 100%;
@@ -498,7 +499,6 @@
             margin: 0;
         }
 
-        /* Слайды */
         .about-carousel__slides {
             position: relative;
             width: 100%;
@@ -506,7 +506,6 @@
             margin: 0;
         }
 
-        /* Слайд */
         .about-carousel__slide {
             width: 100%;
             height: 100%;
@@ -515,10 +514,9 @@
             left: 0;
             opacity: 0;
             transition: opacity 0.5s ease;
-            z-index: 1; /* Базовый z-index */
+            z-index: 1; 
         }
 
-        /* Фоновое изображение с "мутным" фильтром */
         .about-carousel__slide-bg {
             width: 100%;
             height: 100%;
@@ -531,15 +529,13 @@
             filter: brightness(20%) contrast(80%);
         }
 
-        /* Показ активного слайда */
         .about-carousel input[type="radio"]:checked + input + input + .about-carousel__nav + .about-carousel__slides .about-carousel__slide:nth-child(1),
         .about-carousel input[type="radio"]:nth-child(2):checked + input + .about-carousel__nav + .about-carousel__slides .about-carousel__slide:nth-child(2),
         .about-carousel input[type="radio"]:nth-child(3):checked + .about-carousel__nav + .about-carousel__slides .about-carousel__slide:nth-child(3) {
             opacity: 1;
-            z-index: 2; /* Активный слайд поверх остальных */
+            z-index: 2; 
         }
 
-        /* Навигация (радио-кнопки) */
         .about-carousel__nav {
             position: absolute;
             top: 20px;
@@ -547,8 +543,7 @@
             transform: translateX(-50%);
             display: flex;
             gap: 10px;
-            z-index: 3; /* Точки поверх слайдов */
-        }
+            z-index: 3;         }
 
         .about-carousel__dot {
             width: 10px;
@@ -560,7 +555,7 @@
         }
 
         .about-carousel__dot:hover {
-            background: #F0E5D1;
+            background: #FF0000;
         }
 
         .about-carousel input[type="radio"]:checked + input + input + .about-carousel__nav .about-carousel__dot:nth-child(1),
@@ -569,12 +564,10 @@
             background: #F0E5D1;
         }
 
-        /* Скрываем радио-кнопки */
         .about-carousel input[type="radio"] {
             display: none;
         }
 
-        /* Контент внутри слайда */
         .about-content {
             position: relative;
             z-index: 1;
@@ -587,7 +580,6 @@
             margin: 0;
         }
 
-        /* Заголовок */
         .about-title {
             font-family: 'Vetrino', sans-serif;
             font-size: 36px;
@@ -597,14 +589,180 @@
             margin-top: 0;
         }
 
-        /* Текст в пунктирной рамке */
+
         .about-text {
             max-width: 600px;
             padding: 20px;
             border: 2px dashed #F0E5D1;
             color: #F0E5D1;
-            font-size: 18px;
+            font-size: 24px;
             line-height: 1.5;
             text-align: center;
             margin: 0;
+        }
+/*СТИЛИ ДЛЯ СТРАНИЦЫ FORM-MAIN */
+    /* Секция с описанием на странице form-main */
+        .form-hero-section {
+            width: 100%;
+            position: relative;
+            margin: 50px 0;
+            padding: 20px;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Контейнер для левой и правой частей */
+        .form-hero-container {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+
+        /* Левая часть (заголовок и текст) */
+        .form-hero-left {
+            width: 50%;
+            text-align: left;
+        }
+
+        /* Заголовок */
+        .form-hero-title {
+            font-family: 'Vetrino', sans-serif;
+            font-size: 54px;
+            color: black;
+            text-transform: uppercase;
+            margin: 0 0 20px 0;
+        }
+
+        /* Точки под заголовком */
+        .form-hero-dots {
+            width: 100%;
+        }
+
+        .form-hero-dots::after {
+            content: "• • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • ";
+            display: block;
+            text-align: left;
+            font-size: 18px;
+            letter-spacing: 8px;
+            color: black;
+            margin-bottom: 20px;
+            white-space: nowrap; 
+            overflow: hidden;
+        }
+
+        /* Текст в левой части */
+        .form-hero-content {
+            font-size: 24px;
+            line-height: 1.5;
+            color: black;
+        }
+
+        .form-hero-content p {
+            margin: 0;
+        }
+
+        /* Правая часть (ВНИМАНИЕ) */
+        .form-hero-right {
+            width: 40%;
+            text-align: left;
+            font-size: 24px;
+            line-height: 1.5;
+            color: black;
+        }
+        .form-hero-right-dots::after {
+            content: "• • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • ";
+            display: block;
+            text-align: left;
+            font-size: 18px;
+            letter-spacing: 8px;
+            color: black;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .form-hero-right p {
+            margin: 0;
+        }
+
+        /* Выделенное слово "ВНИМАНИЕ" */
+        .form-hero-right .highlight {
+            color: #FF4500; 
+            text-transform: uppercase;
+            font-size: 30px;
+
+        }
+        .highlight{
+            padding-bottom: 15px;
+        }
+
+/* Секция "Добавление героя" */
+        .add-hero-section {
+            width: 100%;
+            text-align: center;
+            position: relative;
+            margin: 50px 0;
+            padding: 20px;
+            background-image: url('assets/photo/bg-form.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .add-hero-container {
+            width: 100%;
+            max-width: 1200px; 
+        }
+
+        .add-hero-title {
+            font-family: 'Vetrino', sans-serif;
+            color: #F0E5D1;
+            text-transform: uppercase;
+            font-size: 48px;
+            margin-bottom: 30px;
+        }
+
+        .add-hero-birds {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px; 
+        }
+
+        .bird-item {
+            position: relative;
+            width: 80px; 
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bird-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; 
+        }
+
+        .bird-connected {
+            position: relative;
+        }
+
+        .bird-connected:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -20px; 
+            width: 20px; 
+            height: 2px;
+            background: #F0E5D1; 
+            transform: translateY(-50%);
         }
