@@ -30,7 +30,29 @@
             </div>
         </nav>
     </header>
-
+    <!--Банн на нагетсы -->
+    <div class="banner">
+        <video class="banner-video" autoplay muted loop>
+            <source src="assets/video/video-1.mp4" type="video/mp4">
+            Ваш браузер не поддерживает воспроизведение видео.
+        </video>
+        <button class="play-button"></button>
+    </div>
+    <!-- Новый блок с контролами -->
+    <div class="history-controls">
+        <div class="history-controls__header">
+            <span class="history-controls__title history-controls__title--left">ВСЕ ИСТОРИИ</span>
+            <div class="history-controls__buttons">
+                <button class="history-controls__button history-controls__button--grid"></button>
+                <button class="history-controls__button history-controls__button--list"></button>
+            </div>
+            <span class="history-controls__title history-controls__title--right">ДОБАВИТЬ ИСТОРИЮ</span>
+        </div>
+        <div class="history-controls__footer">
+            <span class="history-controls__filter">А Б В Г Д Е Ё Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Э Ю Я</span>
+            <span class="history-controls__pagination">ПОКАЗАТЬ ПО 15 • ИСТОРИЙ</span>
+        </div>
+    </div>
     <!--футер-->
     <footer class="footer">
         <div class="container">
@@ -70,5 +92,6 @@
             </div>
         </div>
     </footer>
+    <script src="js/button-play.js"></script>
 </body>
 </html>

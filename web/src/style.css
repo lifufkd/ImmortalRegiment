@@ -766,3 +766,142 @@
             background: #F0E5D1; 
             transform: translateY(-50%);
         }
+/*СТРАНИЦА ГАЛЛЕРЕЯ */
+    /* баннер */
+        .banner-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            filter: brightness(70%); 
+        }
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #FF0000;
+            border: none;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%; /* Делаем кнопку круглой */
+        }
+
+        .play-button::before {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-left: 20px solid #fff;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+        }
+    /*после баннера */
+        .history-controls {
+            width: 80%; /* Такая же ширина, как у баннера */
+            margin: 20px auto; /* Отступ сверху и снизу */
+            text-align: center;
+            font-family: 'Vetrino', sans-serif;
+        }
+
+        .history-controls__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .history-controls__title {
+            font-size: 64px;
+            color: #000; /* Черный цвет, так как фон светлый */
+            text-transform: uppercase;
+        }
+
+        .history-controls__title--left {
+            text-align: left;
+        }
+
+        .history-controls__title--right {
+            text-align: right;
+            font-size: 24px;
+        }
+
+        .history-controls__buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .history-controls__button {
+            width: 40px;
+            height: 40px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Кнопка с квадратами (сетка) */
+        .history-controls__button--grid {
+            background-color: #000; /* Черный фон */
+        }
+
+        .history-controls__button--grid::before,
+        .history-controls__button--grid::after {
+            content: '';
+            display: block;
+            width: 10px;
+            height: 10px;
+            background: #fff; /* Белые квадраты */
+            position: absolute;
+        }
+
+        .history-controls__button--grid::before {
+            transform: translate(-8px, -8px);
+        }
+
+        .history-controls__button--grid::after {
+            transform: translate(8px, 8px);
+        }
+
+        /* Кнопка с полосками (список) */
+        .history-controls__button--list {
+            background-color: #8B4513; /* Коричневый фон */
+        }
+
+        .history-controls__button--list::before,
+        .history-controls__button--list::after {
+            content: '';
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: #fff; /* Белые полоски */
+            position: absolute;
+        }
+
+        .history-controls__button--list::before {
+            transform: translateY(-5px);
+        }
+
+        .history-controls__button--list::after {
+            transform: translateY(5px);
+        }
+
+        .history-controls__footer {
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            color: #000;
+            text-transform: uppercase;
+        }
+
+        .history-controls__filter {
+            text-align: left;
+        }
+
+        .history-controls__pagination {
+            text-align: right;
+        }
