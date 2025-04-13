@@ -612,7 +612,6 @@
             flex-direction: column;
         }
 
-        /* Контейнер для левой и правой частей */
         .form-hero-container {
             width: 100%;
             display: flex;
@@ -621,13 +620,11 @@
             margin-top: 20px;
         }
 
-        /* Левая часть (заголовок и текст) */
         .form-hero-left {
             width: 50%;
             text-align: left;
         }
 
-        /* Заголовок */
         .form-hero-title {
             font-family: 'Vetrino', sans-serif;
             font-size: 54px;
@@ -636,7 +633,6 @@
             margin: 0 0 20px 0;
         }
 
-        /* Точки под заголовком */
         .form-hero-dots {
             width: 100%;
         }
@@ -653,7 +649,7 @@
             overflow: hidden;
         }
 
-        /* Текст в левой части */
+
         .form-hero-content {
             font-size: 24px;
             line-height: 1.5;
@@ -664,7 +660,6 @@
             margin: 0;
         }
 
-        /* Правая часть (ВНИМАНИЕ) */
         .form-hero-right {
             width: 40%;
             text-align: left;
@@ -689,7 +684,6 @@
             margin: 0;
         }
 
-        /* Выделенное слово "ВНИМАНИЕ" */
         .form-hero-right .highlight {
             color: #FF4500; 
             text-transform: uppercase;
@@ -766,6 +760,150 @@
             background: #F0E5D1; 
             transform: translateY(-50%);
         }
+    /* Секция "Основная информация" */
+        .main-info-section {
+            width: 100%;
+            position: relative;
+            margin: 50px 0;
+            padding: 20px;
+            min-height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-info-container {
+            width: 100%;
+            max-width: 800px; /* Ограничиваем ширину формы */
+            text-align: center;
+        }
+
+        .main-info-title {
+            font-family: 'Vetrino', sans-serif;
+            font-size: 48px;
+            color: black;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+
+        .main-info-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .form-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+            gap: 30px;
+        }
+
+        .form-photo-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            width: 40%; /* Фото занимает меньше места */
+        }
+
+        .photo-placeholder {
+            width: 300px; /* Увеличиваем ширину */
+            height: 400px; /* Увеличиваем высоту */
+            background-image: url('assets/photo/unknow-user.svg');
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .photo-instruction {
+            font-size: 12px;
+            color: black;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .form-inputs {
+            width: 60%; /* Инпуты занимают больше места */
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .add-photo-button {
+            margin-left: 70px;
+            background: none;
+            border: 1px solid black;
+            color: black;
+            padding: 10px 50px;
+            font-size: 18px;
+            cursor: pointer;
+            font-family: 'Vetrino', sans-serif;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            width: 70%;
+            white-space: nowrap;
+        }
+
+        .add-photo-button::before,
+        .add-photo-button::after {
+            content: "•\A•\A•";
+            font-size: 14px;
+            color: black;
+            white-space: pre-line;
+            line-height: 1;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .input-label {
+            font-size: 18px;
+            color: black;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .input-wrapper {
+            display: flex;
+            align-items: center;
+            width: 70%; /* Уменьшаем ширину инпутов */
+            border: 1px solid black;
+        }
+
+        .form-control {
+            flex: 1;
+            background: none !important;
+            border: none;
+            color: black !important;
+            padding: 10px 20px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .form-control:focus {
+            outline: none;
+            background: none !important;
+            color: black !important;
+        }
+
+        .form-note {
+            font-size: 14px;
+            color: black;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+
 /*СТРАНИЦА ГАЛЛЕРЕЯ */
     /* баннер */
         .banner-video {
