@@ -1043,3 +1043,61 @@
         .history-controls__pagination {
             text-align: right;
         }
+    /*карточка*/
+        .hero-gallery {
+            display: flex;
+            flex-wrap: wrap; /* Перенос на следующую строку */
+            gap: 20px; /* Отступ между карточками */
+            width: 80%; /* Такая же ширина, как у баннера и history-controls */
+            margin: 20px auto; /* Центрируем */
+            justify-content: space-between; /* Равномерно распределяем карточки */
+        }
+        .hero-card {
+            display: flex;
+            width: calc(33.33% - 14px); /* 33.33% для трех карточек в ряд, минус отступы */
+            height: 300px; /* Фиксированная высота карточки */
+            border: 2px solid #FF0000;
+            font-family: 'Vetrino', sans-serif;
+            background-color: #fff;
+        }
+
+        .hero-card__image {
+            width: 50%; /* Изображение занимает половину карточки */
+            height: 100%;
+        }
+
+        .hero-card__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+        }
+
+        .hero-card__info {
+            width: 50%; /* Текст занимает вторую половину */
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Текст начинается сверху */
+            align-items: flex-start; /* Текст выровнен по левой части */
+        }
+
+        .hero-card__name {
+            font-size: 24px;
+            color: #FF0000; /* Красный цвет для имени */
+            text-transform: uppercase;
+            margin: 0 0 10px 0;
+        }
+
+        .hero-card__location {
+            font-size: 18px;
+            color: #000;
+            text-transform: uppercase;
+            margin: 0 0 5px 0;
+        }
+
+        .hero-card__details {
+            font-size: 16px;
+            color: #000;
+            margin: 0;
+        }
