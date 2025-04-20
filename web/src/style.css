@@ -30,7 +30,7 @@
             content: "• • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • ";
             display: block;
             text-align: center;
-            font-size: 18px;
+            font-size: 18px !important;
             letter-spacing: 8px; 
             color: black;
             margin-top: 5px;
@@ -904,6 +904,21 @@
         }
 
 
+    /* Стили для Bootstrap Tooltip */
+        .tooltip-inner {
+            background-color: #F0E5D1;
+            color: #333;
+            border: 1px solid #333;
+            font-family: 'Vetrino', sans-serif;
+            font-size: 14px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .bs-tooltip-top .tooltip-arrow::before {
+            border-top-color: #333;
+        }
 /*СТРАНИЦА ГАЛЛЕРЕЯ */
     /* баннер */
         .banner-video {

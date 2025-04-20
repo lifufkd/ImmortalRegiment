@@ -34,7 +34,7 @@
     <!-- Новый блок с описанием -->
     <section class="form-hero-section">
         <div class="form-hero-left">
-            <h1 class="form-hero-title ">ЗАПИШИ ГЕРОЯ В ПОЛК</h1>
+            <h1 class="form-hero-title">ЗАПИШИ ГЕРОЯ В ПОЛК</h1>
         </div>
         <div class="form-hero-dots"></div>
         <div class="form-hero-container">
@@ -91,9 +91,9 @@
                     <div class="form-inputs">
                         <button type="button" class="add-photo-button">ДОБАВИТЬ ФОТО</button>
                         <div class="input-group">
-                            <label class="input-label">ФАМИЛИЯ ВЕТЕРАНА *</label>
+                            <label class="input-label">ФАМИЛИЯ ВЕТЕРАНА <span class="required-star" id="surname-required" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Это обязательное поле">*</span></label>
                             <div class="input-wrapper">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" required>
                             </div>
                         </div>
                         <div class="input-group">
@@ -111,9 +111,9 @@
                     </div>
                 </div>
                 <p class="form-note">
-                    Нажмите на кнопку «Далее», вы будете согласны на обработку персональных данных
+                    Нажимая на кнопку «Далее», вы будете согласны на обработку персональных данных.
                 </p>
-                <button type="submit" class="custom-button custom-button--dark-text">ДАЛЕЕ</button>
+                <a href="form-second.html"><button type="button" class="custom-button custom-button--dark-text">ДАЛЕЕ</button></a>
             </form>
         </div>
     </section>
@@ -156,5 +156,14 @@
             </div>
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+            tooltipTriggerList.forEach(tooltipTriggerEl => {
+                new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
