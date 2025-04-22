@@ -30,7 +30,7 @@
             content: "• • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • ";
             display: block;
             text-align: center;
-            font-size: 18px !important;
+            font-size: 18px;
             letter-spacing: 8px; 
             color: black;
             margin-top: 5px;
@@ -760,8 +760,8 @@
             background: #F0E5D1; 
             transform: translateY(-50%);
         }
-    /* Секция "Основная информация" */
-        .main-info-section {
+        /* Секция "Основная информация" для form-main.html */
+        .main-info-section-main {
             width: 100%;
             position: relative;
             margin: 50px 0;
@@ -772,10 +772,11 @@
             align-items: center;
         }
 
-        .main-info-container {
+        .main-info-container-main {
             width: 100%;
-            max-width: 800px; /* Ограничиваем ширину формы */
+            max-width: 800px;
             text-align: center;
+            margin: 0 auto;
         }
 
         .main-info-title {
@@ -784,16 +785,17 @@
             color: black;
             text-transform: uppercase;
             margin-bottom: 30px;
+            white-space: nowrap; /* Запрещаем перенос текста */
         }
 
-        .main-info-form {
+        .main-info-form-main {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 20px;
         }
 
-        .form-content {
+        .form-content-main {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
@@ -801,12 +803,12 @@
             gap: 30px;
         }
 
-        .form-photo-upload {
+        .form-photo-upload-main {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 10px;
-            width: 40%; /* Фото занимает меньше места */
+            width: 40%;
         }
 
         .photo-placeholder {
@@ -825,15 +827,15 @@
             line-height: 1.5;
         }
 
-        .form-inputs {
-            width: 60%; /* Инпуты занимают больше места */
+        .form-inputs-main {
+            width: 60%;
             display: flex;
             flex-direction: column;
             gap: 15px;
+            align-items: center; /* Центрируем все дочерние элементы */
         }
 
         .add-photo-button {
-            margin-left: 70px;
             background: none;
             border: 1px solid black;
             color: black;
@@ -845,6 +847,7 @@
             margin-bottom: 20px;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 20px;
             width: 70%;
             white-space: nowrap;
@@ -859,35 +862,245 @@
             line-height: 1;
         }
 
-        .input-group {
+        /* Секция "История солдата" для form-second.html */
+        .main-info-section-second {
+            width: 100%;
+            position: relative;
+            margin: 50px 0;
+            padding: 20px;
+            min-height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-info-container-second {
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .main-info-form-second {
             display: flex;
             flex-direction: column;
             align-items: center;
+            gap: 20px;
+        }
+
+        .form-content-second {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+            gap: 30px;
+        }
+
+        .form-inputs-second {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        /* Секция "Дополнительная информация" для form-third.html */
+        .main-info-section-third {
+            width: 100%;
+            position: relative;
+            margin: 50px 0;
+            padding: 20px;
+            min-height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-info-container-third {
+            width: 100%;
+            max-width: 900px;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .main-info-form-third {
+            display: flex;
+            max-width: 850px;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding-left: 50px;
+        }
+
+        .form-content-third {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            gap: 30px;
+        }
+
+        .form-photo-upload-third {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            width: 40%;
+        }
+
+        .form-inputs-third {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .large-text-input {
+            width: 100%;
+            display: flex;
+            justify-content: center; /* Центрируем textarea */
+        }
+
+        .large-textarea {
+            width: 100%;
+            max-width: 100%; /* Увеличиваем ширину */
+            height: 200px; /* Увеличиваем высоту */
+            resize: none; /* Запрещаем изменение размера */
+            background: none !important;
+            border: 1px solid black;
+            color: black !important;
+            padding: 15px 20px; /* Увеличиваем отступы */
+            font-size: 18px;
+            text-align: left;
+            font-family: 'Vetrino', sans-serif;
+        }
+
+        .large-textarea:focus {
+            outline: none;
+            background: none !important;
+            color: black !important;
+        }
+
+        .input-row-third {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
             width: 100%;
         }
 
-        .input-label {
+        /* Стили для form-main.html */
+        .input-group-main {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Лейбл и инпут выравниваются по левой границе относительно друг друга */
+            width: 70%; /* Ограничиваем ширину группы */
+        }
+
+        .input-group-main .input-label {
             font-size: 18px;
             color: black;
             text-transform: uppercase;
             margin-bottom: 5px;
+            text-align: left; /* Текст заголовка выровнен влево */
+            width: 100%; /* Лейбл занимает всю ширину .input-group-main */
         }
 
-        .input-wrapper {
+        .input-group-main .input-wrapper {
             display: flex;
             align-items: center;
-            width: 70%; /* Уменьшаем ширину инпутов */
             border: 1px solid black;
+            justify-content: flex-start; /* Содержимое инпута выровнено влево */
+            width: 100%; /* Инпут занимает всю ширину .input-group-main */
         }
 
-        .form-control {
+        .input-group-main .form-control {
             flex: 1;
             background: none !important;
             border: none;
             color: black !important;
             padding: 10px 20px;
             font-size: 18px;
-            text-align: center;
+            text-align: left; /* Текст в инпутах выровнен влево */
+        }
+
+        /* Стили для form-second.html */
+        .input-group-second {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Выравнивание по левой стороне */
+            width: 100%;
+        }
+
+        .input-group-second .input-label {
+            font-size: 18px;
+            color: black;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            text-align: left; /* Текст заголовка выровнен влево */
+            width: 100%;
+        }
+
+        .input-group-second .input-wrapper {
+            display: flex;
+            align-items: center;
+            border: 1px solid black;
+            justify-content: flex-start; /* Инпуты выровнены влево */
+            width: 100%;
+        }
+
+        .input-group-second .form-control {
+            flex: 1;
+            background: none !important;
+            border: none;
+            color: black !important;
+            padding: 10px 20px;
+            font-size: 18px;
+            text-align: left; /* Текст в инпутах выровнен влево */
+        }
+
+        /* Стили для form-third.html */
+        .input-group-third {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Центрируем содержимое */
+            width: 40%; /* Каждый инпут занимает примерно половину строки с учётом gap */
+        }
+
+        .input-group-third .input-label {
+            font-size: 18px;
+            color: black;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            text-align: left;
+            width: 100%;
+        }
+
+        .input-group-third .input-wrapper {
+            display: flex;
+            align-items: center;
+            border: 1px solid black;
+            justify-content: center; /* Инпуты центрированы */
+            width: 100%;
+        }
+
+        .input-group-third .form-control {
+            flex: 1;
+            background: none !important;
+            border: none;
+            color: black !important;
+            padding: 10px 20px;
+            font-size: 18px;
+            text-align: center; /* Текст в инпутах центрирован */
+        }
+
+        /* Общие стили для инпутов */
+        .input-wrapper[style*="display: flex"] {
+            width: 100%;
+        }
+
+        .input-wrapper[style*="display: flex"] .form-control {
+            text-align: left; /* Переопределяем для случаев с селектами */
         }
 
         .form-control:focus {
