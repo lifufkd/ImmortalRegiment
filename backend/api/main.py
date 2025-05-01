@@ -1,5 +1,5 @@
 import asyncio
-from fastapi import FastAPI, status
+from fastapi import FastAPI, status, Request
 from fastapi.responses import JSONResponse
 from contextlib import asynccontextmanager
 from fastapi_pagination import add_pagination
@@ -51,49 +51,44 @@ app.state.limiter = limiter
 app.add_exception_handler(429, _rate_limit_exceeded_handler)
 
 
-@app.exception_handler(Exception)
-async def exception_handler(request, exc: Exception) -> JSONResponse:
-    match exc:
-        case HeroNotFound():
-            return JSONResponse(
-                status_code=status.HTTP_404_NOT_FOUND,
-                content={"detail": str(exc)}
-            )
-        case HeroOnModeration():
-            return JSONResponse(
-                status_code=status.HTTP_403_FORBIDDEN,
-                content={"detail": str(exc)}
-            )
-        case WarNotFound():
-            return JSONResponse(
-                status_code=status.HTTP_404_NOT_FOUND,
-                content={"detail": str(exc)}
-            )
-        case MilitaryRankNotFound():
-            return JSONResponse(
-                status_code=status.HTTP_404_NOT_FOUND,
-                content={"detail": str(exc)}
-            )
-        case InvalidFileType():
-            return JSONResponse(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                content={"detail": str(exc)},
-            )
-        case FIleToBig():
-            return JSONResponse(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                content={"detail": str(exc)},
-            )
-        case ImageCorrupted():
-            return JSONResponse(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                content={"detail": str(exc)},
-            )
-        case FileNotFound():
-            return JSONResponse(
-                status_code=status.HTTP_404_NOT_FOUND,
-                content={"detail": str(exc)}
-            )
+@app.exception_handler(HeroNotFound)
+async def hero_not_found_handler(request: Request, exc: HeroNotFound):
+    return JSONResponse(status_code=status.HTTP_404_NOT_FOUND, content={"detail": str(exc)})
+
+
+@app.exception_handler(HeroOnModeration)
+async def hero_on_moderation_handler(request: Request, exc: HeroOnModeration):
+    return JSONResponse(status_code=status.HTTP_403_FORBIDDEN, content={"detail": str(exc)})
+
+
+@app.exception_handler(WarNotFound)
+async def war_not_found_handler(request: Request, exc: WarNotFound):
+    return JSONResponse(status_code=status.HTTP_404_NOT_FOUND, content={"detail": str(exc)})
+
+
+@app.exception_handler(MilitaryRankNotFound)
+async def military_rank_not_found_handler(request: Request, exc: MilitaryRankNotFound):
+    return JSONResponse(status_code=status.HTTP_404_NOT_FOUND, content={"detail": str(exc)})
+
+
+@app.exception_handler(InvalidFileType)
+async def invalid_file_type_handler(request: Request, exc: InvalidFileType):
+    return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"detail": str(exc)})
+
+
+@app.exception_handler(FIleToBig)
+async def file_too_big_handler(request: Request, exc: FIleToBig):
+    return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"detail": str(exc)})
+
+
+@app.exception_handler(ImageCorrupted)
+async def image_corrupted_handler(request: Request, exc: ImageCorrupted):
+    return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"detail": str(exc)})
+
+
+@app.exception_handler(FileNotFound)
+async def file_not_found_handler(request: Request, exc: FileNotFound):
+    return JSONResponse(status_code=status.HTTP_404_NOT_FOUND, content={"detail": str(exc)})
 
 app.include_router(heroes_router)
 app.include_router(military_ranks_router)
