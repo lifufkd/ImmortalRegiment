@@ -31,8 +31,92 @@
         </nav>
     </header>
 
+    <!-- Новый блок с описанием -->
+    <section class="form-hero-section">
+        <div class="form-hero-left">
+            <h1 class="form-hero-title">ЗАПИШИ ГЕРОЯ В ПОЛК</h1>
+        </div>
+        <div class="form-hero-dots"></div>
+        <div class="form-hero-container">
+            <div class="form-hero-left">
+                <div class="form-hero-content">
+                    <p>
+                        Наш проект создан для сохранения памяти о героях нашего города, сражавшихся в разных войнах. Мы призываем вас не ограничиваться лишь фактами биографии, а делиться личными воспоминаниями, эмоциями и чувствами. Расскажите, что значит для вас этот человек, какие истории о нем передавались в вашей семье.
+                    </p>
+                </div>
+            </div>
+            <div class="form-hero-right">
+                <p>
+                    <span class="highlight">ВНИМАНИЕ</span>
+                </p>
+                <div class="form-hero-right-dots"></div>
+                <p>
+                    В связи с большим количеством новых историй накануне праздника время модерации может составить неделю. Надеемся на понимание! 
+                </p>
+            </div>
+        </div>
+    </section>
 
-
+    <!-- Блок "Добавление героя" -->
+    <section class="add-hero-section">
+        <div class="add-hero-container">
+            <h2 class="add-hero-title">ДОБАВЛЕНИЕ ГЕРОЯ</h2>
+            <div class="add-hero-birds">
+                <div class="bird-item bird-connected">
+                    <img src="assets/photo/1.png" alt="Птица 1">
+                </div>
+                <div class="bird-item bird-connected">
+                    <img src="assets/photo/bird-black.png" alt="Птица 2">
+                </div>
+                <div class="bird-item bird-connected">
+                    <img src="assets/photo/bird-black.png" alt="Птица 3">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Блок с формой "Основная информация" -->
+    <section class="main-info-section-main">
+        <div class="main-info-container-main">
+            <h2 class="main-info-title">ОСНОВНАЯ ИНФОРМАЦИЯ</h2>
+            <form class="main-info-form-main">
+                <div class="form-content-main">
+                    <div class="form-photo-upload-main">
+                        <div class="photo-placeholder">
+                            <!-- Здесь будет загруженное фото или placeholder -->
+                        </div>
+                        <p class="photo-instruction">
+                            Разрешённые типы файлов: jpg, png.
+                        </p>
+                    </div>
+                    <div class="form-inputs-main">
+                        <button type="button" class="add-photo-button">ДОБАВИТЬ ФОТО</button>
+                        <div class="input-group-main">
+                            <label class="input-label">ФАМИЛИЯ ВЕТЕРАНА <span class="required-star" id="surname-required" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Это обязательное поле">*</span></label>
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="input-group-main">
+                            <label class="input-label">ИМЯ ВЕТЕРАНА</label>
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="input-group-main">
+                            <label class="input-label">ОТЧЕСТВО ВЕТЕРАНА</label>
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="form-note">
+                    Нажимая на кнопку «Далее», вы будете согласны на обработку персональных данных.
+                </p>
+                <a href="form-second.html"><button type="button" class="custom-button custom-button--dark-text">ДАЛЕЕ</button></a>
+            </form>
+        </div>
+    </section>
       <!--футер-->
     <footer class="footer">
         <div class="container">
@@ -40,8 +124,8 @@
                 <div class="col nav-links d-flex">
                     <a href="index.html">Главная</a>
                     <a href="form-main.html">Записать героя в полк</a>
-                    <a href="about.html">Галерея</a>
-                    <a href="gallery.html">О проекте</a>
+                    <a href="about.html">О проекте</a>
+                    <a href="gallery.html">Галерея</a>
                 </div>
             </div>
             <div class="footer-custom"></div>
@@ -72,5 +156,14 @@
             </div>
         </div>
     </footer>
-</body>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+            tooltipTriggerList.forEach(tooltipTriggerEl => {
+                new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<body>
 </html>

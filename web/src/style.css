@@ -136,9 +136,7 @@
             .about-page .footer {
                 margin-top: 0;
             }
-
-/* СТИЛИ ДЛЯ ГЛАВНОЙ СТРАНИЦЫ */
-    /* Контейнер формы */
+            /* Контейнер формы */
             .contact-form {
                 display: flex;
                 flex-direction: column;
@@ -201,6 +199,7 @@
                 cursor: pointer;
                 width: 30%;
                 white-space: nowrap;
+                border-radius: 0 !important;
             }
             .contact-form button:hover {
                 background: rgba(240, 229, 209, 0.2); 
@@ -222,6 +221,7 @@
             .authors-text{
                 padding-left: 15px;
                 padding-right: 15px;
+                padding-top: 15px;
                 border: 1px solid #F0E5D1;
             }
             .logo-ft {
@@ -231,6 +231,8 @@
             .logo-ft img {
                 width: 250px; 
             }
+
+/* СТИЛИ ДЛЯ ГЛАВНОЙ СТРАНИЦЫ */
             /*все по баннеру*/
     .banner {
             position: relative;
@@ -434,7 +436,7 @@
             width: 32%;
             height: auto;
             display: block;
-            filter: sepia(70%); /* Применяем сепия-фильтр с интенсивностью 70% */
+            filter: sepia(70%); 
             transition: filter 0.3s ease;
         }
 
@@ -490,7 +492,6 @@
             flex-direction: column;
         }
 
-        /* Карусель */
         .about-carousel {
             position: relative;
             width: 100%;
@@ -498,7 +499,6 @@
             margin: 0;
         }
 
-        /* Слайды */
         .about-carousel__slides {
             position: relative;
             width: 100%;
@@ -506,7 +506,6 @@
             margin: 0;
         }
 
-        /* Слайд */
         .about-carousel__slide {
             width: 100%;
             height: 100%;
@@ -515,10 +514,9 @@
             left: 0;
             opacity: 0;
             transition: opacity 0.5s ease;
-            z-index: 1; /* Базовый z-index */
+            z-index: 1; 
         }
 
-        /* Фоновое изображение с "мутным" фильтром */
         .about-carousel__slide-bg {
             width: 100%;
             height: 100%;
@@ -531,15 +529,13 @@
             filter: brightness(20%) contrast(80%);
         }
 
-        /* Показ активного слайда */
         .about-carousel input[type="radio"]:checked + input + input + .about-carousel__nav + .about-carousel__slides .about-carousel__slide:nth-child(1),
         .about-carousel input[type="radio"]:nth-child(2):checked + input + .about-carousel__nav + .about-carousel__slides .about-carousel__slide:nth-child(2),
         .about-carousel input[type="radio"]:nth-child(3):checked + .about-carousel__nav + .about-carousel__slides .about-carousel__slide:nth-child(3) {
             opacity: 1;
-            z-index: 2; /* Активный слайд поверх остальных */
+            z-index: 2; 
         }
 
-        /* Навигация (радио-кнопки) */
         .about-carousel__nav {
             position: absolute;
             top: 20px;
@@ -547,8 +543,7 @@
             transform: translateX(-50%);
             display: flex;
             gap: 10px;
-            z-index: 3; /* Точки поверх слайдов */
-        }
+            z-index: 3;         }
 
         .about-carousel__dot {
             width: 10px;
@@ -560,7 +555,7 @@
         }
 
         .about-carousel__dot:hover {
-            background: #F0E5D1;
+            background: #FF0000;
         }
 
         .about-carousel input[type="radio"]:checked + input + input + .about-carousel__nav .about-carousel__dot:nth-child(1),
@@ -569,12 +564,10 @@
             background: #F0E5D1;
         }
 
-        /* Скрываем радио-кнопки */
         .about-carousel input[type="radio"] {
             display: none;
         }
 
-        /* Контент внутри слайда */
         .about-content {
             position: relative;
             z-index: 1;
@@ -587,7 +580,6 @@
             margin: 0;
         }
 
-        /* Заголовок */
         .about-title {
             font-family: 'Vetrino', sans-serif;
             font-size: 36px;
@@ -597,14 +589,743 @@
             margin-top: 0;
         }
 
-        /* Текст в пунктирной рамке */
+
         .about-text {
             max-width: 600px;
             padding: 20px;
             border: 2px dashed #F0E5D1;
             color: #F0E5D1;
-            font-size: 18px;
+            font-size: 24px;
             line-height: 1.5;
             text-align: center;
+            margin: 0;
+        }
+/*СТИЛИ ДЛЯ СТРАНИЦЫ FORM-MAIN */
+    /* Секция с описанием на странице form-main */
+        .form-hero-section {
+            width: 100%;
+            position: relative;
+            margin: 50px 0;
+            padding: 20px;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-hero-container {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+
+        .form-hero-left {
+            width: 50%;
+            text-align: left;
+        }
+
+        .form-hero-title {
+            font-family: 'Vetrino', sans-serif;
+            font-size: 54px;
+            color: black;
+            text-transform: uppercase;
+            margin: 0 0 20px 0;
+        }
+
+        .form-hero-dots {
+            width: 100%;
+        }
+
+        .form-hero-dots::after {
+            content: "• • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • ";
+            display: block;
+            text-align: left;
+            font-size: 18px;
+            letter-spacing: 8px;
+            color: black;
+            margin-bottom: 20px;
+            white-space: nowrap; 
+            overflow: hidden;
+        }
+
+
+        .form-hero-content {
+            font-size: 24px;
+            line-height: 1.5;
+            color: black;
+        }
+
+        .form-hero-content p {
+            margin: 0;
+        }
+
+        .form-hero-right {
+            width: 40%;
+            text-align: left;
+            font-size: 24px;
+            line-height: 1.5;
+            color: black;
+        }
+        .form-hero-right-dots::after {
+            content: "• • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • ";
+            display: block;
+            text-align: left;
+            font-size: 18px;
+            letter-spacing: 8px;
+            color: black;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .form-hero-right p {
+            margin: 0;
+        }
+
+        .form-hero-right .highlight {
+            color: #FF4500; 
+            text-transform: uppercase;
+            font-size: 30px;
+
+        }
+        .highlight{
+            padding-bottom: 15px;
+        }
+
+/* Секция "Добавление героя" */
+        .add-hero-section {
+            width: 100%;
+            text-align: center;
+            position: relative;
+            margin: 50px 0;
+            padding: 20px;
+            background-image: url('assets/photo/bg-form.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .add-hero-container {
+            width: 100%;
+            max-width: 1200px; 
+        }
+
+        .add-hero-title {
+            font-family: 'Vetrino', sans-serif;
+            color: #F0E5D1;
+            text-transform: uppercase;
+            font-size: 48px;
+            margin-bottom: 30px;
+        }
+
+        .add-hero-birds {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px; 
+        }
+
+        .bird-item {
+            position: relative;
+            width: 80px; 
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bird-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; 
+        }
+
+        .bird-connected {
+            position: relative;
+        }
+
+        .bird-connected:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -20px; 
+            width: 20px; 
+            height: 2px;
+            background: #F0E5D1; 
+            transform: translateY(-50%);
+        }
+        /* Секция "Основная информация" для form-main.html */
+        .main-info-section-main {
+            width: 100%;
+            position: relative;
+            margin: 50px 0;
+            padding: 20px;
+            min-height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-info-container-main {
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .main-info-title {
+            font-family: 'Vetrino', sans-serif;
+            font-size: 48px;
+            color: black;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            white-space: nowrap; /* Запрещаем перенос текста */
+        }
+
+        .main-info-form-main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .form-content-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+            gap: 30px;
+        }
+
+        .form-photo-upload-main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            width: 40%;
+        }
+
+        .photo-placeholder {
+            width: 300px; /* Увеличиваем ширину */
+            height: 400px; /* Увеличиваем высоту */
+            background-image: url('assets/photo/unknow-user.svg');
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .photo-instruction {
+            font-size: 12px;
+            color: black;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .form-inputs-main {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center; /* Центрируем все дочерние элементы */
+        }
+
+        .add-photo-button {
+            background: none;
+            border: 1px solid black;
+            color: black;
+            padding: 10px 50px;
+            font-size: 18px;
+            cursor: pointer;
+            font-family: 'Vetrino', sans-serif;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            width: 70%;
+            white-space: nowrap;
+        }
+
+        .add-photo-button::before,
+        .add-photo-button::after {
+            content: "•\A•\A•";
+            font-size: 14px;
+            color: black;
+            white-space: pre-line;
+            line-height: 1;
+        }
+
+        /* Секция "История солдата" для form-second.html */
+        .main-info-section-second {
+            width: 100%;
+            position: relative;
+            margin: 50px 0;
+            padding: 20px;
+            min-height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-info-container-second {
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .main-info-form-second {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .form-content-second {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+            gap: 30px;
+        }
+
+        .form-inputs-second {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        /* Секция "Дополнительная информация" для form-third.html */
+        .main-info-section-third {
+            width: 100%;
+            position: relative;
+            margin: 50px 0;
+            padding: 20px;
+            min-height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-info-container-third {
+            width: 100%;
+            max-width: 900px;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .main-info-form-third {
+            display: flex;
+            max-width: 850px;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding-left: 50px;
+        }
+
+        .form-content-third {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            gap: 30px;
+        }
+
+        .form-photo-upload-third {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            width: 40%;
+        }
+
+        .form-inputs-third {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .large-text-input {
+            width: 100%;
+            display: flex;
+            justify-content: center; /* Центрируем textarea */
+        }
+
+        .large-textarea {
+            width: 100%;
+            max-width: 100%; /* Увеличиваем ширину */
+            height: 200px; /* Увеличиваем высоту */
+            resize: none; /* Запрещаем изменение размера */
+            background: none !important;
+            border: 1px solid black;
+            color: black !important;
+            padding: 15px 20px; /* Увеличиваем отступы */
+            font-size: 18px;
+            text-align: left;
+            font-family: 'Vetrino', sans-serif;
+        }
+
+        .large-textarea:focus {
+            outline: none;
+            background: none !important;
+            color: black !important;
+        }
+
+        .input-row-third {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            width: 100%;
+        }
+
+        /* Стили для form-main.html */
+        .input-group-main {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Лейбл и инпут выравниваются по левой границе относительно друг друга */
+            width: 70%; /* Ограничиваем ширину группы */
+        }
+
+        .input-group-main .input-label {
+            font-size: 18px;
+            color: black;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            text-align: left; /* Текст заголовка выровнен влево */
+            width: 100%; /* Лейбл занимает всю ширину .input-group-main */
+        }
+
+        .input-group-main .input-wrapper {
+            display: flex;
+            align-items: center;
+            border: 1px solid black;
+            justify-content: flex-start; /* Содержимое инпута выровнено влево */
+            width: 100%; /* Инпут занимает всю ширину .input-group-main */
+        }
+
+        .input-group-main .form-control {
+            flex: 1;
+            background: none !important;
+            border: none;
+            color: black !important;
+            padding: 10px 20px;
+            font-size: 18px;
+            text-align: left; /* Текст в инпутах выровнен влево */
+        }
+
+        /* Стили для form-second.html */
+        .input-group-second {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Выравнивание по левой стороне */
+            width: 100%;
+        }
+
+        .input-group-second .input-label {
+            font-size: 18px;
+            color: black;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            text-align: left; /* Текст заголовка выровнен влево */
+            width: 100%;
+        }
+
+        .input-group-second .input-wrapper {
+            display: flex;
+            align-items: center;
+            border: 1px solid black;
+            justify-content: flex-start; /* Инпуты выровнены влево */
+            width: 100%;
+        }
+
+        .input-group-second .form-control {
+            flex: 1;
+            background: none !important;
+            border: none;
+            color: black !important;
+            padding: 10px 20px;
+            font-size: 18px;
+            text-align: left; /* Текст в инпутах выровнен влево */
+        }
+
+        /* Стили для form-third.html */
+        .input-group-third {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Центрируем содержимое */
+            width: 40%; /* Каждый инпут занимает примерно половину строки с учётом gap */
+        }
+
+        .input-group-third .input-label {
+            font-size: 18px;
+            color: black;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            text-align: left;
+            width: 100%;
+        }
+
+        .input-group-third .input-wrapper {
+            display: flex;
+            align-items: center;
+            border: 1px solid black;
+            justify-content: center; /* Инпуты центрированы */
+            width: 100%;
+        }
+
+        .input-group-third .form-control {
+            flex: 1;
+            background: none !important;
+            border: none;
+            color: black !important;
+            padding: 10px 20px;
+            font-size: 18px;
+            text-align: center; /* Текст в инпутах центрирован */
+        }
+
+        /* Общие стили для инпутов */
+        .input-wrapper[style*="display: flex"] {
+            width: 100%;
+        }
+
+        .input-wrapper[style*="display: flex"] .form-control {
+            text-align: left; /* Переопределяем для случаев с селектами */
+        }
+
+        .form-control:focus {
+            outline: none;
+            background: none !important;
+            color: black !important;
+        }
+
+        .form-note {
+            font-size: 14px;
+            color: black;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+
+    /* Стили для Bootstrap Tooltip */
+        .tooltip-inner {
+            background-color: #F0E5D1;
+            color: #333;
+            border: 1px solid #333;
+            font-family: 'Vetrino', sans-serif;
+            font-size: 14px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .bs-tooltip-top .tooltip-arrow::before {
+            border-top-color: #333;
+        }
+/*СТРАНИЦА ГАЛЛЕРЕЯ */
+    /* баннер */
+        .banner-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            filter: brightness(70%); 
+        }
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #FF0000;
+            border: none;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%; /* Делаем кнопку круглой */
+        }
+
+        .play-button::before {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-left: 20px solid #fff;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+        }
+    /*после баннера */
+        .history-controls {
+            width: 80%; /* Такая же ширина, как у баннера */
+            margin: 20px auto; /* Отступ сверху и снизу */
+            text-align: center;
+            font-family: 'Vetrino', sans-serif;
+        }
+
+        .history-controls__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .history-controls__title {
+            font-size: 64px;
+            color: #000; /* Черный цвет, так как фон светлый */
+            text-transform: uppercase;
+        }
+
+        .history-controls__title--left {
+            text-align: left;
+        }
+
+        .history-controls__title--right {
+            text-align: right;
+            font-size: 24px;
+        }
+
+        .history-controls__buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .history-controls__button {
+            width: 40px;
+            height: 40px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Кнопка с квадратами (сетка) */
+        .history-controls__button--grid {
+            background-color: #000; /* Черный фон */
+        }
+
+        .history-controls__button--grid::before,
+        .history-controls__button--grid::after {
+            content: '';
+            display: block;
+            width: 10px;
+            height: 10px;
+            background: #fff; /* Белые квадраты */
+            position: absolute;
+        }
+
+        .history-controls__button--grid::before {
+            transform: translate(-8px, -8px);
+        }
+
+        .history-controls__button--grid::after {
+            transform: translate(8px, 8px);
+        }
+
+        /* Кнопка с полосками (список) */
+        .history-controls__button--list {
+            background-color: #8B4513; /* Коричневый фон */
+        }
+
+        .history-controls__button--list::before,
+        .history-controls__button--list::after {
+            content: '';
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: #fff; /* Белые полоски */
+            position: absolute;
+        }
+
+        .history-controls__button--list::before {
+            transform: translateY(-5px);
+        }
+
+        .history-controls__button--list::after {
+            transform: translateY(5px);
+        }
+
+        .history-controls__footer {
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            color: #000;
+            text-transform: uppercase;
+        }
+
+        .history-controls__filter {
+            text-align: left;
+        }
+
+        .history-controls__pagination {
+            text-align: right;
+        }
+    /*карточка*/
+        .hero-gallery {
+            display: flex;
+            flex-wrap: wrap; /* Перенос на следующую строку */
+            gap: 20px; /* Отступ между карточками */
+            width: 80%; /* Такая же ширина, как у баннера и history-controls */
+            margin: 20px auto; /* Центрируем */
+            justify-content: space-between; /* Равномерно распределяем карточки */
+        }
+        .hero-card {
+            display: flex;
+            width: calc(33.33% - 14px); /* 33.33% для трех карточек в ряд, минус отступы */
+            height: 300px; /* Фиксированная высота карточки */
+            border: 2px solid #FF0000;
+            font-family: 'Vetrino', sans-serif;
+            background-color: #fff;
+        }
+
+        .hero-card__image {
+            width: 50%; /* Изображение занимает половину карточки */
+            height: 100%;
+        }
+
+        .hero-card__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+        }
+
+        .hero-card__info {
+            width: 50%; /* Текст занимает вторую половину */
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Текст начинается сверху */
+            align-items: flex-start; /* Текст выровнен по левой части */
+        }
+
+        .hero-card__name {
+            font-size: 24px;
+            color: #FF0000; /* Красный цвет для имени */
+            text-transform: uppercase;
+            margin: 0 0 10px 0;
+        }
+
+        .hero-card__location {
+            font-size: 18px;
+            color: #000;
+            text-transform: uppercase;
+            margin: 0 0 5px 0;
+        }
+
+        .hero-card__details {
+            font-size: 16px;
+            color: #000;
             margin: 0;
         }
