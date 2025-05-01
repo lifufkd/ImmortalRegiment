@@ -1,5 +1,6 @@
 import asyncio
 from fastapi import FastAPI, status, Request
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from contextlib import asynccontextmanager
 from fastapi_pagination import add_pagination
@@ -47,8 +48,18 @@ app = FastAPI(
     lifespan=lifespan
 )
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 app.state.limiter = limiter
 app.add_exception_handler(429, _rate_limit_exceeded_handler)
+
 
 
 @app.exception_handler(HeroNotFound)
