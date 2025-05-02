@@ -1,6 +1,6 @@
 services:
   backend:
-    image: ghcr.io/lifufkd/immortal-regiment:web-latest
+    image: ghcr.io/lifufkd/immortal-regiment:backend-latest
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -24,7 +24,7 @@ services:
     command: ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
 
   tg_bot:
-    image: ghcr.io/lifufkd/immortal-regiment:web-latest
+    image: ghcr.io/lifufkd/immortal-regiment:backend-latest
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -47,7 +47,7 @@ services:
     command: ["python", "tg_bot/bot.py"]
 
   celery_worker:
-    image: ghcr.io/lifufkd/immortal-regiment:web-latest
+    image: ghcr.io/lifufkd/immortal-regiment:backend-latest
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -64,7 +64,7 @@ services:
       - backend
     command: ["celery", "-A", "celery_worker.worker", "worker", "--loglevel=INFO"]
   celery_beat:
-    image: ghcr.io/lifufkd/immortal-regiment:web-latest
+    image: ghcr.io/lifufkd/immortal-regiment:backend-latest
     build:
       context: ./backend
       dockerfile: Dockerfile
