@@ -26,15 +26,14 @@
             position: relative;
             padding-bottom: 10px;
         }
-        .navbar-custom::after {
-            content: "• • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • ";
-            display: block;
-            text-align: center;
+        
+        .dots{
             font-size: 18px;
             letter-spacing: 8px; 
             color: black;
             margin-top: 5px;
-        }
+            text-overflow: clip; 
+        } 
         .navbar-brand {
             display: flex;
             align-items: center;
