@@ -132,7 +132,15 @@
                         <div class="input-group-second">
                             <label class="input-label">ГОДЫ СЛУЖБЫ</label>
                             <div class="input-wrapper">
-                                <input type="text" class="form-control" placeholder="Введите годы службы">
+                                <input type="text" 
+                                       class="form-control" 
+                                       placeholder="Введите годы службы в формате ГГГГ-ГГГГ" 
+                                       pattern="^(19|20)\d{2}-(19|20)\d{2}$"
+                                       title="Введите годы в формате ГГГГ-ГГГГ (например, 1943-2000)"
+                                       required>
+                                <div class="invalid-feedback">
+                                    Пожалуйста, введите годы в формате ГГГГ-ГГГГ (например, 1943-2000)
+                                </div>
                             </div>
                         </div>
                         <div class="input-group-second">
@@ -190,7 +198,17 @@
                                 <input type="text" class="form-control" name="death-year" placeholder="Год" style="width: 20%;">
                             </div>
                         </div>
+                        <div class="input-group-second">
+                            <label class="input-label">Война</label>
+                            <div class="input-wrapper" style="display: flex; gap: 10px;">
+                                <select class="form-control" name="war">
+                                    <option value="1">ВОВ</option>
+                                    <option value="2">Чеченская война</option>
+                                    <option value="3">Афганистан</option>
+                                    <option value="4">СВО</option>
+                                </select>
                     </div>
+                    
                 </div>
                 <div class="form-buttons" style="display: flex; gap: 20px; justify-content: center; margin-top: 20px;">
                     <button type="button" class="custom-button custom-button--dark-text" onclick="window.location.href='form-main.html'">НАЗАД</button>
@@ -238,7 +256,10 @@
             </div>
         </div>
     </footer>
+    <script src="js/valid-years.js"></script>
     <script src="js/dot-separator.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/form-submit.js"></script>
 </body>
 </html>
