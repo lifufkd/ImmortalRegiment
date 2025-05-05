@@ -82,7 +82,8 @@ async def select_random_heroes() -> Page[Hero]:
             select(Hero)
             .order_by(func.random())
             .filter(
-                Hero.moderation_status == ModerationStatus.APPROVED
+                Hero.moderation_status == ModerationStatus.APPROVED,
+                Hero.photo_name.isnot(None)
             )
         )
 
