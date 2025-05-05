@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const existingData = JSON.parse(localStorage.getItem('heroFormData')) || {};
             const updatedData = { ...existingData, ...data };
             localStorage.setItem('heroFormData', JSON.stringify(updatedData));
-            console.log(`Saved ${formId} data to localStorage:`, updatedData);
         } catch (error) {
             console.error('Error saving to localStorage:', error);
             alert('Ошибка при сохранении данных. Проверьте настройки браузера.');
@@ -145,7 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
             let formData;
             try {
                 formData = JSON.parse(localStorage.getItem('heroFormData')) || {};
-                console.log('Retrieved form data from localStorage:', formData);
             } catch (error) {
                 console.error('Error retrieving from localStorage:', error);
                 alert('Ошибка при загрузке данных. Попробуйте начать заново.');
@@ -187,21 +185,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
-                const formDataToSend = new FormData();
-                for (const key in payload) {
-                    if (payload[key] !== null) {
-                        formDataToSend.append(key, payload[key]);
-                    }
-                }
+                console.log(formData.photo)
                 if (formData.photo) {
-                    formDataToSend.append('photo', formData.photo);
+                    const response = await axios.post('http://127.0.0.1:8000/heroes/', formData, {
+                        payload,
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                          }
+                    });
                 }
-
-                const response = await axios.post('http://127.0.0.1:8000/heroes/', formDataToSend, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                });
+                else {
+                    const response = await axios.post('http://127.0.0.1:8000/heroes/', 
+                        {},
+                        {
+                          params: payload
+                        }
+                      );
+                }
 
                 alert('Данные успешно отправлены!');
                 localStorage.removeItem('heroFormData');
