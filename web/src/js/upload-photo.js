@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Настраиваем input
     fileInput.type = 'file';
+    fileInput.id = 'photo-data';
     fileInput.accept = 'image/jpeg,image/png'; // Ограничиваем типы файлов
     fileInput.style.display = 'none'; // Скрываем input
     document.body.appendChild(fileInput); // Добавляем input в DOM

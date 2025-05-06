@@ -26,27 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Add hidden file input for photo upload
         const addPhotoButton = form.querySelector('.add-photo-button');
-        const photoInput = document.createElement('input');
-        photoInput.type = 'file';
-        photoInput.accept = 'image/jpeg,image/png';
-        photoInput.style.display = 'none';
-        form.appendChild(photoInput);
-
-        addPhotoButton.addEventListener('click', () => {
-            photoInput.click();
-        });
-
-        photoInput.addEventListener('change', () => {
-            const file = photoInput.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const photoPlaceholder = form.querySelector('.photo-placeholder');
-                    photoPlaceholder.innerHTML = `<img src="${e.target.result}" alt="Uploaded Photo" style="max-width: 100%; max-height: 200px;">`;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
+        const photoInput = document.getElementById("photo-data");
 
         // Prevent default navigation and save data first
         nextButton.addEventListener('click', (e) => {
@@ -65,10 +45,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 surname: surnameInput.value || null,
                 name: nameInput.value || null,
                 patronymic: patronymicInput.value || null,
-                photo: photoInput.files[0] || null,
-                photo_name: photoInput.files[0] ? photoInput.files[0].name : null,
-                photo_type: photoInput.files[0] ? photoInput.files[0].type : null
+                photo: photoInput.files[0] || null
             };
+            
 
             saveFormData('main', formData);
             window.location.href = nextLink.href; // Navigate after saving
@@ -122,6 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 military_rank_id: militaryRankInput.value || null,
                 military_specialty: militarySpecialtyInput.value || null
             };
+            console.log(formData)
 
             saveFormData('second', formData);
             window.location.href = nextLink.href; // Navigate after saving
@@ -149,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Ошибка при загрузке данных. Попробуйте начать заново.');
                 return;
             }
-
+            console.log(formData.photo);
             // Prepare data for API
             const payload = {
                 hero_id: Date.now().toString(),
@@ -169,6 +149,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 sender_name: senderNameInput.value || null,
                 sender_email: senderEmailInput.value || null
             };
+            const formDataPhoto = new FormData();
+            formDataPhoto.append('photo', formData.photo);
+            console.log(formDataPhoto)
 
             // Log payload for debugging
             console.log('Payload to send:', payload);
@@ -185,14 +168,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
-                console.log(formData.photo)
-                if (formData.photo) {
-                    const response = await axios.post('http://127.0.0.1:8000/heroes/', formData, {
-                        payload,
+                console.log(formDataPhoto)
+                if (formDataPhoto) {
+                    const response = await axios.post('http://127.0.0.1:8000/heroes/', formDataPhoto, {
+                        params: payload, // query-параметры
                         headers: {
-                            'Content-Type': 'multipart/form-data'
-                          }
-                    });
+                          'Content-Type': 'multipart/form-data',
+                        },
+                      }
+                      
                 }
                 else {
                     const response = await axios.post('http://127.0.0.1:8000/heroes/', 
