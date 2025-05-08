@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Полк героев</title>
@@ -58,7 +59,7 @@
                 <div class="form-content-third">
                     <div class="form-inputs-third">
                         <div class="large-text-input">
-                            <textarea class="form-control large-textarea" rows="5" placeholder="Введите дополнительную информацию"></textarea>
+                            <textarea class="form-control large-textarea" rows="5" id="additional_information" placeholder="Введите дополнительную информацию"></textarea>
                         </div>
                         <h3 class="main-info-title pt-3">ИНФОРМАЦИЯ ОТПРАВИТЕЛЯ</h3>
                         <div class="input-row-third">
@@ -81,13 +82,13 @@
                     Нажимая на кнопку «Отправить», вы даёте согласие на обработку персональных данных.
                 </p>
                 <div class="form-buttons" style="display: flex; gap: 60px; justify-content: center; margin-top: 20px;">
-                    <button type="button" class="custom-button custom-button--dark-text" style="width: 370px; display: flex; justify-content: space-between" onclick="window.location.href='form-second.html'">НАЗАД</button>
+                    <button type="submit" class="custom-button custom-button--dark-text" style="width: 370px; display: flex; justify-content: space-between">НАЗАД</button>
                     <button type="submit" class="custom-button custom-button--dark-text" style="width: 370px;">ОТПРАВИТЬ</button>
                 </div>
             </form>
         </div>
     </section>
-
+    <script src="js/form-third.js"></script>
     <!--футер-->
     <footer class="footer">
         <div class="container">

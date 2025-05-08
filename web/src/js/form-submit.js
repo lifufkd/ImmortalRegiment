@@ -1,3 +1,4 @@
+/*
 document.addEventListener('DOMContentLoaded', () => {
     // Helper function to map month names to numbers
     const monthMap = {
@@ -175,8 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         headers: {
                           'Content-Type': 'multipart/form-data',
                         },
-                      }
-                      
+                      })  
                 }
                 else {
                     const response = await axios.post('http://127.0.0.1:8000/heroes/', 
@@ -197,3 +197,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+*/

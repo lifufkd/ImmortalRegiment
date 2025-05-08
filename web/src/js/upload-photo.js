@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     const addPhotoButton = document.querySelector('.add-photo-button');
     const photoPlaceholder = document.querySelector('.photo-placeholder');
-    let fileInput = document.createElement('input'); // Создаем скрытый input для выбора файла
+    let fileInput = document.getElementById('photo-input'); // Создаем скрытый input для выбора файла
 
-    // Настраиваем input
-    fileInput.type = 'file';
-    fileInput.id = 'photo-data';
-    fileInput.accept = 'image/jpeg,image/png'; // Ограничиваем типы файлов
-    fileInput.style.display = 'none'; // Скрываем input
-    document.body.appendChild(fileInput); // Добавляем input в DOM
+    // // Настраиваем input
+    // fileInput.type = 'file';
+    // fileInput.id = 'photo-data';
+    // fileInput.accept = 'image/jpeg,image/png'; // Ограничиваем типы файлов
+    // fileInput.style.display = 'none'; // Скрываем input
+    // document.body.appendChild(fileInput); // Добавляем input в DOM
 
     // Обработчик клика по кнопке "Добавить фото"
     addPhotoButton.addEventListener('click', () => {
