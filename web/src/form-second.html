@@ -49,6 +49,7 @@
             </div>
         </div>
     </section>
+
     <!-- Блок с формой "История солдата" -->
     <section class="main-info-section-second">
         <div class="main-info-container-second">
@@ -64,8 +65,8 @@
                         </div>
                         <div class="input-group-second">
                             <label class="input-label">ДАТА РОЖДЕНИЯ</label>
-                            <div class="input-wrapper" style="display: flex; gap: 10px;">
-                                <select class="form-control" name="birth-day" style="width: 20%;">
+                            <div class="input-wrapper select-wrapper" style="display: flex; gap: 10px;">
+                                <select class="form-control" name="birth-day" style="width: 20%; border-right: 1px solid black;">
                                     <option value="">Нет</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -99,7 +100,7 @@
                                     <option value="30">30</option>
                                     <option value="31">31</option>
                                 </select>
-                                <select class="form-control" name="birth-month" style="width: 60%;">
+                                <select class="form-control" name="birth-month" style="width: 60%; border-right: 1px solid black;">
                                     <option value="">Нет</option>
                                     <option value="january">Январь</option>
                                     <option value="february">Февраль</option>
@@ -119,8 +120,33 @@
                         </div>
                         <div class="input-group-second">
                             <label class="input-label">ВОИНСКОЕ ЗВАНИЕ</label>
-                            <div class="input-wrapper">
-                                <input type="text" class="form-control" placeholder="Введите воинское звание">
+                            <div class="input-wrapper select-wrapper">
+                                <select class="form-control" name="rank">
+                                    <option value="">Нет</option>
+                                    <option value="Ефрейтор">Ефрейтор</option>
+                                    <option value="Рядовой">Рядовой</option>
+                                    <option value="Матрос">Матрос</option>
+                                    <option value="Младший сержант">Младший сержант</option>
+                                    <option value="Старший матрос">Старший матрос</option>
+                                    <option value="Сержант">Сержант</option>
+                                    <option value="Старший сержант">Старший сержант</option>
+                                    <option value="Старшина">Старшина</option>
+                                    <option value="Младший лейтенант">Младший лейтенант</option>
+                                    <option value="Лейтенант">Лейтенант</option>
+                                    <option value="Старший лейтенант">Старший лейтенант</option>
+                                    <option value="Капитан">Капитан</option>
+                                    <option value="Прапорщик">Прапорщик</option>
+                                    <option value="Старший прапорщик">Старший прапорщик</option>
+                                    <option value="Мичман">Мичман</option>
+                                    <option value="Старший мичман">Старший мичман</option>
+                                    <option value="Капитан-лейтенант">Капитан-лейтенант</option>
+                                    <option value="Майор">Майор</option>
+                                    <option value="Подполковник">Подполковник</option>
+                                    <option value="Полковник">Полковник</option>
+                                    <option value="Генерал-майор">Генерал-майор</option>
+                                    <option value="Генерал-лейтенант">Генерал-лейтенант</option>
+                                    <option value="Генерал-полковник">Генерал-полковник</option>
+                                </select>
                             </div>
                         </div>
                         <div class="input-group-second">
@@ -134,19 +160,16 @@
                             <div class="input-wrapper">
                                 <input type="text" 
                                        class="form-control" 
+                                       id="service-years"
                                        placeholder="Введите годы службы в формате ГГГГ-ГГГГ" 
                                        pattern="^(19|20)\d{2}-(19|20)\d{2}$"
-                                       title="Введите годы в формате ГГГГ-ГГГГ (например, 1943-2000)"
-                                       required>
-                                <div class="invalid-feedback">
-                                    Пожалуйста, введите годы в формате ГГГГ-ГГГГ (например, 1943-2000)
-                                </div>
+                                       title="Введите годы в формате ГГГГ-ГГГГ (например, 1943-2000)">
                             </div>
                         </div>
                         <div class="input-group-second">
                             <label class="input-label">ДАТА СМЕРТИ (ГИБЕЛИ)</label>
-                            <div class="input-wrapper" style="display: flex; gap: 10px;">
-                                <select class="form-control" name="death-day" style="width: 20%;">
+                            <div class="input-wrapper select-wrapper" style="display: flex; gap: 10px;">
+                                <select class="form-control" name="death-day" style="width: 20%; border-right: 1px solid black;">
                                     <option value="">Нет</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -180,7 +203,7 @@
                                     <option value="30">30</option>
                                     <option value="31">31</option>
                                 </select>
-                                <select class="form-control" name="death-month" style="width: 60%;">
+                                <select class="form-control" name="death-month" style="width: 60%; border-right: 1px solid black;">
                                     <option value="">Нет</option>
                                     <option value="january">Январь</option>
                                     <option value="february">Февраль</option>
@@ -199,25 +222,28 @@
                             </div>
                         </div>
                         <div class="input-group-second">
-                            <label class="input-label">Война</label>
-                            <div class="input-wrapper" style="display: flex; gap: 10px;">
+                            <label class="input-label">ВОЙНА</label>
+                            <div class="input-wrapper select-wrapper">
                                 <select class="form-control" name="war">
-                                    <option value="1">ВОВ</option>
+                                    <option value="">Нет</option>
+                                    <option value="1">Великая Отечественная война</option>
                                     <option value="2">Чеченская война</option>
-                                    <option value="3">Афганистан</option>
+                                    <option value="3">Афганская война</option>
                                     <option value="4">СВО</option>
                                 </select>
+                            </div>
+                        </div>
                     </div>
-                    
                 </div>
                 <div class="form-buttons" style="display: flex; gap: 20px; justify-content: center; margin-top: 20px;">
                     <button type="button" class="custom-button custom-button--dark-text" onclick="window.location.href='form-main.html'">НАЗАД</button>
-                    <a href="form-third.html"><button type="button" class="custom-button custom-button--dark-text">ДАЛЕЕ</button></a>
+                    <button type="submit" class="custom-button custom-button--dark-text" onclick="window.location.href='form-third.html'">ДАЛЕЕ</button>
                 </div>
             </form>
         </div>
     </section>
-      <!--футер-->
+
+    <!--футер-->
     <footer class="footer">
         <div class="container">
             <div class="row mb-3">
@@ -228,8 +254,8 @@
                     <a href="gallery.html">Галерея</a>
                 </div>
             </div>
-            <div class=" dots text-truncate text-light"></div>
-            <div class=" contact-authors">
+            <div class="dots text-truncate text-light"></div>
+            <div class="contact-authors">
                 <div class="contact-form">
                     <p class="call-text mb-5 pt-5">Свяжитесь с нами</p>
                     <div class="row">
@@ -250,7 +276,7 @@
                     </div>
                 </div>
             </div>
-            <div class=" dots text-truncate text-light pt-5"></div>
+            <div class="dots text-truncate text-light pt-5"></div>
             <div class="logo-ft">
                 <img src="assets/photo/logo.png" alt="Наш Бессмертный Полк">
             </div>

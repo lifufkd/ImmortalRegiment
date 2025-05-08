@@ -447,25 +447,33 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background-color: #ff4500;
-            color: white;
-            border: none;
+            background-color: rgba(255, 69, 0, 0.8); /* Более прозрачный фон для контраста */
+            border: 2px solid #F0E5D1; /* Добавляем рамку для лучшей видимости */
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 20px;
+            width: 60px; /* Увеличиваем размер */
+            height: 60px;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .carousel-button img {
+            width: 30px; /* Размер иконки */
+            height: 30px;
+        }
+
+        .carousel-button:hover {
+            background-color: rgba(255, 69, 0, 1); /* Увеличиваем насыщенность при наведении */
         }
 
         .carousel-button.prev {
-            left: 10px; 
+            left: 20px; /* Немного сдвигаем от края для лучшей видимости */
         }
 
         .carousel-button.next {
-            right: 10px; 
+            right: 20px;
         }
 
         .carousel-link {
@@ -545,8 +553,8 @@
             z-index: 3;         }
 
         .about-carousel__dot {
-            width: 10px;
-            height: 10px;
+            width: 20px;
+            height: 20px;
             background: #fff;
             border-radius: 50%;
             cursor: pointer;
@@ -866,6 +874,41 @@
             white-space: pre-line;
             line-height: 1;
         }
+        /* Стили для уведомления об ошибке */
+        .error-message {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #F0E5D1;
+            padding: 15px 30px;
+            margin: 10px 0;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        .error-message p {
+            color: #F0E5D1;
+            font-size: 18px;
+            margin: 10px 0;
+            font-family: 'Vetrino', sans-serif;
+            text-transform: uppercase;
+        }
+        .error-message p::before {
+            content: "⚠ ";
+            color: #FF4500;
+        }
+        .error-dot-separator {
+            font-size: 18px;
+            letter-spacing: 8px;
+            color: #F0E5D1;
+            white-space: nowrap;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         /* Секция "История солдата" для form-second.html */
         .main-info-section-second {
@@ -909,7 +952,20 @@
             gap: 15px;
             align-items: center;
         }
+        .input-group-second .select-wrapper {
+            position: relative;
+        }
+        .input-group-second .select-wrapper select.form-control {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            padding-right: 30px; /* Отступ для иконки */
+            background-image: url('assets/photo/arrow.svg')!important;
+            background-position: right 10px center !important;
+            background-repeat: no-repeat !important;
+            background-size: 16px 13px !important; /* Размер иконки */
 
+        }
         /* Секция "Дополнительная информация" для form-third.html */
         .main-info-section-third {
             width: 100%;
@@ -1120,7 +1176,60 @@
             text-align: center;
             margin: 10px 0;
         }
-
+        /* Стили для модального окна */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border: 2px solid #F0E5D1;
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            color: #FF4500;
+            cursor: pointer;
+        }
+        .modal-close:hover {
+            color: #333;
+        }
+        .modal-title {
+            font-family: 'Vetrino', sans-serif;
+            font-size: 24px;
+            color: #FF4500;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .modal-text {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .modal-dots {
+            font-size: 18px;
+            letter-spacing: 8px;
+            color: black;
+            display: block;
+        }
 
     /* Стили для Bootstrap Tooltip */
         .tooltip-inner {
@@ -1199,68 +1308,6 @@
             text-align: right;
             font-size: 24px;
         }
-
-        .history-controls__buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .history-controls__button {
-            width: 40px;
-            height: 40px;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Кнопка с квадратами (сетка) */
-        .history-controls__button--grid {
-            background-color: #000; /* Черный фон */
-        }
-
-        .history-controls__button--grid::before,
-        .history-controls__button--grid::after {
-            content: '';
-            display: block;
-            width: 10px;
-            height: 10px;
-            background: #fff; /* Белые квадраты */
-            position: absolute;
-        }
-
-        .history-controls__button--grid::before {
-            transform: translate(-8px, -8px);
-        }
-
-        .history-controls__button--grid::after {
-            transform: translate(8px, 8px);
-        }
-
-        /* Кнопка с полосками (список) */
-        .history-controls__button--list {
-            background-color: #8B4513; /* Коричневый фон */
-        }
-
-        .history-controls__button--list::before,
-        .history-controls__button--list::after {
-            content: '';
-            display: block;
-            width: 20px;
-            height: 2px;
-            background: #fff; /* Белые полоски */
-            position: absolute;
-        }
-
-        .history-controls__button--list::before {
-            transform: translateY(-5px);
-        }
-
-        .history-controls__button--list::after {
-            transform: translateY(5px);
-        }
-
         .history-controls__footer {
             display: flex;
             justify-content: space-between;
@@ -1272,65 +1319,150 @@
         .history-controls__filter {
             text-align: left;
         }
+        .history-controls__filter span {
+            cursor: pointer;
+            padding: 0 5px;
+            transition: color 0.3s ease;
+        }
+        .history-controls__filter span:hover,
+        .history-controls__filter span.active {
+            color: #FF4500;
+        }
 
         .history-controls__pagination {
             text-align: right;
         }
+        #pagination-select {
+            background: none;
+            border: 1px solid #333;
+            color: #333;
+            font-family: 'Vetrino', sans-serif;
+            font-size: 16px;
+            padding: 2px 5px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+        #pagination-select:focus {
+            outline: none;
+        }
     /*карточка*/
         .hero-gallery {
             display: flex;
-            flex-wrap: wrap; /* Перенос на следующую строку */
-            gap: 20px; /* Отступ между карточками */
-            width: 80%; /* Такая же ширина, как у баннера и history-controls */
-            margin: 20px auto; /* Центрируем */
-            justify-content: space-between; /* Равномерно распределяем карточки */
+            flex-wrap: wrap;
+            gap: 20px;
+            width: 80%;
+            margin: 20px auto;
+            justify-content: space-between;
         }
         .hero-card {
             display: flex;
-            width: calc(33.33% - 14px); /* 33.33% для трех карточек в ряд, минус отступы */
-            height: 300px; /* Фиксированная высота карточки */
-            border: 2px solid #FF0000;
+            width: calc(33.33% - 14px);
+            height: 350px;
+            border: 2px solid #F0E5D1;
             font-family: 'Vetrino', sans-serif;
-            background-color: #fff;
+            background: rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
+        .hero-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
         .hero-card__image {
-            width: 50%; /* Изображение занимает половину карточки */
+            width: 50%;
             height: 100%;
         }
-
         .hero-card__image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: grayscale(100%);
+            filter: sepia(30%);
+            transition: filter 0.3s ease;
         }
-
+        .hero-card:hover .hero-card__image img {
+            filter: sepia(0%);
+        }
         .hero-card__info {
-            width: 50%; /* Текст занимает вторую половину */
+            width: 50%;
             padding: 20px;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; /* Текст начинается сверху */
-            align-items: flex-start; /* Текст выровнен по левой части */
+            justify-content: flex-start;
+            align-items: flex-start;
         }
-
         .hero-card__name {
-            font-size: 24px;
-            color: #FF0000; /* Красный цвет для имени */
+            font-size: 22px;
+            color: #FF4500;
             text-transform: uppercase;
             margin: 0 0 10px 0;
         }
-
         .hero-card__location {
-            font-size: 18px;
-            color: #000;
+            font-size: 16px;
+            color: #333;
             text-transform: uppercase;
             margin: 0 0 5px 0;
         }
-
         .hero-card__details {
-            font-size: 16px;
-            color: #000;
+            font-size: 14px;
+            color: #333;
             margin: 0;
+        }
+/* Стили для страницы gallery-single */
+        .hero-single-section {
+            width: 80%;
+            margin: 50px auto;
+            text-align: center;
+            position: relative;
+            padding: 20px;
+        }
+
+        .hero-single-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 30px;
+        }
+
+        .hero-single-image {
+            width: 30%;
+            border: 2px solid #F0E5D1;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-single-image img {
+            width: 350px;
+            height: 500px;
+            object-fit: cover;
+            filter: sepia(30%);
+            transition: filter 0.3s ease;
+        }
+
+        .hero-single-info {
+            width: 60%;
+            text-align: left;
+            color: #333;
+        }
+
+        .hero-single-title {
+            font-family: 'Vetrino', sans-serif;
+            font-size: 48px;
+            color: #FF4500;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .hero-single-location,
+        .hero-single-date-birth,
+        .hero-single-date-death,
+        .hero-single-specialty,
+        .hero-single-rank,
+        .hero-single-war,
+        .hero-single-years,
+        .hero-single-additional {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .hero-single-additional strong {
+            color: #FF4500;
         }
