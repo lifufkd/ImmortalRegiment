@@ -73,8 +73,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Update hero image
     const heroImage = document.querySelector('.hero-single-image img');
-    if (heroImage && heroData.photo_name && heroData.photo_name.trim() !== '') {
-        heroImage.src = `${HERO_BASE_URL}${heroId}/photo`;
-        heroImage.alt = `Photo of ${heroData.name} ${heroData.surname}`;
+    if (heroImage) {
+        const hasPhoto = heroData.photo_name && heroData.photo_name.trim() !== '';
+        heroImage.src = hasPhoto ? `${HERO_BASE_URL}${heroId}/photo` : 'assets/photo/unknow-user.svg';
+        heroImage.alt = hasPhoto ? `Photo of ${heroData.name} ${heroData.surname}` : '';
+    } else {
+        console.warn('Hero image element not found');
     }
 });
