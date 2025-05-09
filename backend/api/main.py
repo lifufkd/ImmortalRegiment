@@ -58,7 +58,7 @@ app.add_middleware(
 )
 
 
-if generic_settings.ENABLE_REQUESTS_LIMITER.value:
+if generic_settings.ENABLE_REQUESTS_LIMITER:
     app.state.limiter = limiter
     app.add_exception_handler(429, _rate_limit_exceeded_handler)
 
