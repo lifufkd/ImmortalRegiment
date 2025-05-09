@@ -1,9 +1,11 @@
-FROM nginx:latest
+FROM nginx:alpine
 
-WORKDIR /usr/share/nginx/html
+RUN apk add --no-cache bash gettext
 
-COPY nginx.conf ./
-COPY src ./src
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY entrypoint.sh /entrypoint.sh
+COPY . /usr/share/nginx/html/
 
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
