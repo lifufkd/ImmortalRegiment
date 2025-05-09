@@ -116,7 +116,7 @@
                                     <option value="november">Ноябрь</option>
                                     <option value="december">Декабрь</option>
                                 </select>
-                                <input type="text" class="form-control" name="birth-year" id="birth_year" placeholder="Год" style="width: 20%;">
+                                <input type="text" class="form-control" name="birth-year" id="birth_year" pattern="^(19|20)\d{2}$" title="Введите год в формате ГГГГ (например, 1920)" placeholder="Год" style="width: 20%;">
                             </div>
                         </div>
                         <div class="input-group-second">
@@ -219,7 +219,7 @@
                                     <option value="november">Ноябрь</option>
                                     <option value="december">Декабрь</option>
                                 </select>
-                                <input type="text" class="form-control" name="death-year" id="death_year" placeholder="Год" style="width: 20%;">
+                                <input type="text" class="form-control" name="death-year" id="death_year" placeholder="Год" pattern="^(19|20)\d{2}$" title="Введите год в формате ГГГГ (например, 1985)" style="width: 20%;">
                             </div>
                         </div>
                         <div class="input-group-second">
@@ -283,6 +283,7 @@
             </div>
         </div>
     </footer>
+    <script type="js/valid-years-date.js"></script>
     <script src="js/valid-years.js"></script>
     <script src="js/dot-separator.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

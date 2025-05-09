@@ -1469,6 +1469,13 @@
             text-transform: uppercase;
             margin-bottom: 20px;
         }
+        .hero-single-additional {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            white-space: normal; /* Разрешаем перенос текста */
+            overflow-wrap: break-word; /* Разбиваем длинные слова */
+        }
 
         .hero-single-location,
         .hero-single-date-birth,
