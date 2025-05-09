@@ -1,27 +1,46 @@
 document.addEventListener('DOMContentLoaded', () => {
     const filterContainer = document.getElementById('alphabet-filter');
     const gallery = document.getElementById('hero-gallery');
-    const cards = gallery.querySelectorAll('.hero-card');
+    let activeLetter = null;
 
-    // Разбиваем строку фильтра на отдельные буквы и добавляем обработчики
+    // Split filter string into letters and create clickable spans
     const letters = filterContainer.textContent.trim().split(/\s+/);
     filterContainer.innerHTML = letters.map(letter => `<span>${letter}</span>`).join(' ');
 
     const filterSpans = filterContainer.querySelectorAll('span');
     filterSpans.forEach(span => {
         span.addEventListener('click', () => {
-            // Удаляем активный класс у всех букв
-            filterSpans.forEach(s => s.classList.remove('active'));
-            // Добавляем активный класс к выбранной букве
-            span.classList.add('active');
-
             const selectedLetter = span.textContent.toLowerCase();
-            cards.forEach(card => {
-                const name = card.dataset.name.toLowerCase();
-                // Проверяем, начинается ли имя, фамилия или отчество с выбранной буквы
-                const matches = name.split(' ').some(part => part.startsWith(selectedLetter));
-                card.style.display = matches ? 'flex' : 'none';
-            });
+
+            // Check if clicking the same letter again
+            if (activeLetter === selectedLetter) {
+                // Clear filter: show all cards
+                const cards = gallery.querySelectorAll('.hero-card');
+                cards.forEach(card => {
+                    card.style.display = 'flex';
+                });
+                // Remove active class from all spans
+                filterSpans.forEach(s => s.classList.remove('active'));
+                activeLetter = null;
+            } else {
+                // Apply filter for selected letter
+                filterSpans.forEach(s => s.classList.remove('active'));
+                span.classList.add('active');
+
+                const cards = gallery.querySelectorAll('.hero-card');
+                cards.forEach(card => {
+                    const name = card.dataset.name.toLowerCase();
+                    const matches = name.split(' ').some(part => part.startsWith(selectedLetter));
+                    card.style.display = matches ? 'flex' : 'none';
+                });
+
+                activeLetter = selectedLetter;
+            }
+
+            // Update pagination
+            if (window.updateGalleryPagination) {
+                window.updateGalleryPagination();
+            }
         });
     });
 });
