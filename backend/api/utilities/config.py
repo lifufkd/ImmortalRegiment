@@ -55,6 +55,7 @@ class RedisSettings(BaseSettings):
 
 class GenericSettings(BaseSettings):
     MODE: str = "production"
+    ENABLE_REQUESTS_LIMITER: bool = True
     WARS_DATA_PATH: Path
     MILITARY_RANKS_DATA_PATH: Path
     MEDIA_FOLDER: Path
