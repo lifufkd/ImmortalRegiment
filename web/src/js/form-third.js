@@ -80,8 +80,7 @@
           );
        }
 
-        alert('Данные успешно отправлены!');
-        //localStorage.clear();
+        localStorage.clear();
 
     } catch (error) {
         console.error('Ошибка при отправке данных:', error);
