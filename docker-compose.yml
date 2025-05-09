@@ -81,6 +81,18 @@ services:
       - backend
     command: ["celery", "-A", "celery_worker.worker", "beat", "--loglevel=INFO"]
 
+  frontend:
+    image: ghcr.io/lifufkd/immortal-regiment:web-latest
+    restart: unless-stopped
+    ports:
+      - ${FRONTEND_PORT:-80}:80
+    env_file:
+      - ".env"
+    depends_on:
+      - backend
+    networks:
+      - backend
+
   postgres:
     image: postgres:13
     restart: always
