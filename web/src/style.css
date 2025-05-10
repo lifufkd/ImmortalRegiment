@@ -1422,9 +1422,63 @@
             cursor: pointer;
             transition: color 0.3s ease;
         }
+        
 
         .page-number:hover {
             color: #FF4500;
+        }
+
+        .page-arrow {
+            font-family: 'Vetrino', sans-serif;
+            font-size: 25px;
+            color: #333;
+            text-transform: uppercase;
+            margin: 0 10px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            position: relative;
+            padding: 0 20px;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .page-arrow::before,
+        .page-arrow::after {
+            content: "•\A•\A•";
+            font-size: 14px;
+            color: #333;
+            white-space: pre-line;
+            line-height: 1;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .page-arrow::before {
+            left: 0;
+        }
+        
+        .page-arrow::after {
+            right: 0;
+        }
+        
+        .page-arrow:hover {
+            color: #FF4500;
+        }
+        
+        .page-arrow:hover::before,
+        .page-arrow:hover::after {
+            color: #FF4500;
+        }
+        
+        .page-arrow.disabled {
+            color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .page-arrow.disabled::before,
+        .page-arrow.disabled::after {
+            color: #ccc;
         }
 /* Стили для страницы gallery-single */
         .hero-single-section {

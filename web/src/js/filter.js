@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 activeLetter = selectedLetter;
             }
 
-            // Update pagination
+            // Update pagination (reset to page 1)
             if (window.updateGalleryPagination) {
                 window.updateGalleryPagination();
             }

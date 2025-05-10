@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', async () => {
     // Configuration
-    const HERO_BASE_URL = 'http://127.0.0.1:8000/heroes/';
-    const MILITARY_RANKS_URL = 'http://127.0.0.1:8000/military-ranks/';
-    const WARS_URL = 'http://127.0.0.1:8000/wars/';
+    const HERO_BASE_URL = `${window.API_BASE_URL}/heroes/`;
+    const MILITARY_RANKS_URL = `${window.API_BASE_URL}/military-ranks/`;
+    const WARS_URL = `${window.API_BASE_URL}/wars/`;
 
     // Helper function to format date from YYYY-MM-DD to DD-MM-YYYY
     const formatDate = (dateStr) => {
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const heroImage = document.querySelector('.hero-single-image img');
     if (heroImage) {
         const hasPhoto = heroData.photo_name && heroData.photo_name.trim() !== '';
-        heroImage.src = hasPhoto ? `${HERO_BASE_URL}${heroId}/photo` : 'assets/photo/unknow-user.svg';
+        heroImage.src = hasPhoto ? `${HERO_BASE_URL}${heroId}/photo` : 'assets/photo/soldier.svg';
         heroImage.alt = hasPhoto ? `Photo of ${heroData.name} ${heroData.surname}` : '';
     } else {
         console.warn('Hero image element not found');
