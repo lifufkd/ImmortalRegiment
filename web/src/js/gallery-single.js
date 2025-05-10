@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const heroImage = document.querySelector('.hero-single-image img');
     if (heroImage) {
         const hasPhoto = heroData.photo_name && heroData.photo_name.trim() !== '';
-        heroImage.src = hasPhoto ? `${HERO_BASE_URL}${heroId}/photo` : 'assets/photo/unknow-user.svg';
+        heroImage.src = hasPhoto ? `${HERO_BASE_URL}${heroId}/photo` : 'assets/photo/soldier.svg';
         heroImage.alt = hasPhoto ? `Photo of ${heroData.name} ${heroData.surname}` : '';
     } else {
         console.warn('Hero image element not found');

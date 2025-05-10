@@ -3,32 +3,38 @@ document.addEventListener('DOMContentLoaded', () => {
     const gallery = document.getElementById('hero-gallery');
     const paginationContainer = document.querySelector('.pagination');
     let currentPage = 1;
+    let totalHeroes = 0;
 
-    // Function to update pagination
+    // Function to update pagination controls
     function updatePagination() {
-        const limit = parseInt(paginationSelect.value, 10);
-        const cards = gallery.querySelectorAll('.hero-card');
-        const visibleCards = Array.from(cards).filter(card => card.style.display !== 'none');
-        const totalCards = visibleCards.length;
-        const totalPages = Math.ceil(totalCards / limit);
+        if (!gallery) {
+            console.error('Gallery container (#hero-gallery) not found');
+            return;
+        }
 
-        // Update card visibility
-        visibleCards.forEach((card, index) => {
-            const start = (currentPage - 1) * limit;
-            const end = start + limit;
-            card.style.display = (index >= start && index < end) ? 'flex' : 'none';
-        });
+        const limit = parseInt(paginationSelect.value, 10);
+        const totalPages = Math.ceil(totalHeroes / limit);
+
+
+        // Ensure currentPage is valid
+        if (currentPage > totalPages && totalPages > 0) {
+            currentPage = totalPages;
+            document.dispatchEvent(new CustomEvent('pageChange', { detail: { page: currentPage } }));
+        } else if (currentPage < 1) {
+            currentPage = 1;
+        }
 
         // Generate pagination controls
         paginationContainer.innerHTML = '';
         if (totalPages > 1) {
             // Previous arrow
             const prevArrow = document.createElement('span');
-            prevArrow.className = 'page-arrow';
-            prevArrow.innerHTML = '&larr;';
+            prevArrow.className = `page-arrow ${currentPage === 1 ? 'disabled' : ''}`;
+            prevArrow.innerHTML = '←';
             prevArrow.addEventListener('click', () => {
                 if (currentPage > 1) {
                     currentPage--;
+                    document.dispatchEvent(new CustomEvent('pageChange', { detail: { page: currentPage } }));
                     updatePagination();
                 }
             });
@@ -41,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 pageNumber.textContent = i;
                 pageNumber.addEventListener('click', () => {
                     currentPage = i;
+                    document.dispatchEvent(new CustomEvent('pageChange', { detail: { page: currentPage } }));
                     updatePagination();
                 });
                 paginationContainer.appendChild(pageNumber);
@@ -48,11 +55,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Next arrow
             const nextArrow = document.createElement('span');
-            nextArrow.className = 'page-arrow';
-            nextArrow.innerHTML = '&rarr;';
+            nextArrow.className = `page-arrow ${currentPage === totalPages ? 'disabled' : ''}`;
+            nextArrow.innerHTML = '→';
             nextArrow.addEventListener('click', () => {
                 if (currentPage < totalPages) {
                     currentPage++;
+                    document.dispatchEvent(new CustomEvent('pageChange', { detail: { page: currentPage } }));
                     updatePagination();
                 }
             });
@@ -60,15 +68,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Initialize pagination
-    updatePagination();
-
-    // Handle pagination select change
-    paginationSelect.addEventListener('change', () => {
-        currentPage = 1; // Reset to first page on limit change
+    // Listen for cardsLoaded event from gallery-data.js
+    document.addEventListener('cardsLoaded', (e) => {
+        totalHeroes = e.detail.total || 0;
         updatePagination();
     });
 
-    // Expose updatePagination for filter.js to call
-    window.updateGalleryPagination = updatePagination;
+    // Handle pagination select change
+    paginationSelect.addEventListener('change', () => {
+        const newSize = parseInt(paginationSelect.value, 10);
+        currentPage = 1; // Reset to first page
+        document.dispatchEvent(new CustomEvent('sizeChange', { detail: { size: newSize } }));
+        updatePagination();
+    });
+
+    // Expose updatePagination for filter.js
+    window.updateGalleryPagination = () => {
+        currentPage = 1; // Reset to first page on filter change
+        document.dispatchEvent(new CustomEvent('pageChange', { detail: { page: currentPage } }));
+        updatePagination();
+    };
 });
