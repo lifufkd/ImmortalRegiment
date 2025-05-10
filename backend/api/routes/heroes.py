@@ -5,21 +5,30 @@ from fastapi_pagination import Page
 from api.schemas.heroes import Hero, AddHero, FilterHero
 from api.services.heroes import create_hero, fetch_hero, get_hero_photo, fetch_heroes, fetch_random_heroes
 from api.limiter.limiter import limiter
+from api.utilities.config import generic_settings
 
 heroes_router = APIRouter(
     tags=["Heroes"],
     prefix="/heroes"
 )
 
-
-@heroes_router.post("/", status_code=status.HTTP_201_CREATED, response_model=Hero)
-@limiter.limit("1/minute")
-async def add_hero(
-        request: Request,
-        hero_data: AddHero = Depends(),
-        photo: UploadFile = File(None)
-):
-    return await create_hero(hero_data=hero_data, hero_photo=photo)
+if generic_settings.ENABLE_REQUESTS_LIMITER:
+    @heroes_router.post("/", status_code=status.HTTP_201_CREATED, response_model=Hero)
+    @limiter.limit("1/minute")
+    async def add_hero(
+            request: Request,
+            hero_data: AddHero = Depends(),
+            photo: UploadFile = File(None)
+    ):
+        return await create_hero(hero_data=hero_data, hero_photo=photo)
+else:
+    @heroes_router.post("/", status_code=status.HTTP_201_CREATED, response_model=Hero)
+    async def add_hero(
+            request: Request,
+            hero_data: AddHero = Depends(),
+            photo: UploadFile = File(None)
+    ):
+        return await create_hero(hero_data=hero_data, hero_photo=photo)
 
 
 @heroes_router.get("/", response_model=Page[Hero])

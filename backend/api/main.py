@@ -20,7 +20,6 @@ from api.utilities.exceptions_storage import (
     FileNotFound,
     ImageCorrupted
 )
-from api.utilities.config import generic_settings
 from api.storage.local import FileManager
 from api.triggers.triggers import setup_hero_delete_trigger, setup_hero_insert_trigger
 from api.triggers.listeners import setup_user_delete_listener, setup_user_insert_listener
@@ -58,9 +57,8 @@ app.add_middleware(
 )
 
 
-if generic_settings.ENABLE_REQUESTS_LIMITER:
-    app.state.limiter = limiter
-    app.add_exception_handler(429, _rate_limit_exceeded_handler)
+app.state.limiter = limiter
+app.add_exception_handler(429, _rate_limit_exceeded_handler)
 
 
 
