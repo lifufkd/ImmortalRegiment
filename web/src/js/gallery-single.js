@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', async () => {
     // Configuration
-    const HERO_BASE_URL = 'http://127.0.0.1:8000/heroes/';
-    const MILITARY_RANKS_URL = 'http://127.0.0.1:8000/military-ranks/';
-    const WARS_URL = 'http://127.0.0.1:8000/wars/';
+    const HERO_BASE_URL = `${window.API_BASE_URL}/heroes/`;
+    const MILITARY_RANKS_URL = `${window.API_BASE_URL}/military-ranks/`;
+    const WARS_URL = `${window.API_BASE_URL}/wars/`;
 
     // Helper function to format date from YYYY-MM-DD to DD-MM-YYYY
     const formatDate = (dateStr) => {

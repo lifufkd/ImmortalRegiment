@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', async () => {
     // Configuration
-    const HEROES_URL = 'http://127.0.0.1:8000/heroes/';
-    const WARS_URL = 'http://127.0.0.1:8000/wars/';
-    const PHOTO_BASE_URL = 'http://127.0.0.1:8000/heroes/';
+    const HEROES_URL = `${window.API_BASE_URL}/heroes/`;
+    const WARS_URL = `${window.API_BASE_URL}/wars/`;
+    const PHOTO_BASE_URL = `${window.API_BASE_URL}/heroes/`;
 
     const paginationSelect = document.getElementById('pagination-select');
     const gallery = document.getElementById('hero-gallery');

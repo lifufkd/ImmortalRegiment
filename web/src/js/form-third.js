@@ -63,7 +63,7 @@
     try {
 
         if (formDataPhoto) {
-            const response = await axios.post('http://127.0.0.1:8000/heroes/', formDataPhoto, {
+            const response = await axios.post(`${window.API_BASE_URL}/heroes/`, formDataPhoto, {
                 params: params, // query-параметры
                 headers: {
                   'Content-Type': 'multipart/form-data',
@@ -72,7 +72,7 @@
         }
 
        else {
-        const response = await axios.post('http://127.0.0.1:8000/heroes/', 
+        const response = await axios.post(`${window.API_BASE_URL}/heroes/`, 
             {},
             {
               params: params
