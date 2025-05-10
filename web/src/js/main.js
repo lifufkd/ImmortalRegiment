@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Configuration
     const API_URL = `${window.API_BASE_URL}/heroes/random`; // Base endpoint for random heroes
     const PHOTO_BASE_URL = `${window.API_BASE_URL}/heroes/`; // Base for photo URL
-    const INTERVAL = window.LONG_POLLING_DELAY; // 5 seconds (increased for stability)
+    const INTERVAL = window.LONG_POLLING_DELAY * 1000; // 5 seconds (increased for stability)
 
     // Check if gallery container exists
     const galleryContainer = document.querySelector('.heroes-gallery');

@@ -83,6 +83,9 @@ services:
 
   frontend:
     image: ghcr.io/lifufkd/immortal-regiment:web-latest
+    build:
+      context: ./web
+      dockerfile: Dockerfile
     restart: unless-stopped
     ports:
       - ${FRONTEND_PORT:-80}:80
