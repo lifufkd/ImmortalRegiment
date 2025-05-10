@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     ports:
-      - ${BACKEND_PORT:-80}:80
+      - ${BACKEND_PORT:-8000}:80
     env_file: .env
     environment:
       - PYTHONPATH=/app
