@@ -6,8 +6,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const paginationSelect = document.getElementById('pagination-select');
     const gallery = document.getElementById('hero-gallery');
+    const alphabetFilter = document.getElementById('alphabet-filter');
     let currentPage = 1;
     let currentSize = parseInt(paginationSelect.value, 10);
+    let activeFilter = null; // Track the active filter letter
+    let activeLetterSpan = null; // Track the active letter span for styling
 
     // Fetch data from API
     const fetchData = async (url, params = {}) => {
@@ -23,7 +26,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Function to refresh gallery
     async function refreshGallery(page = 1, size = currentSize) {
         gallery.innerHTML = ''; // Clear existing cards
-        const heroesData = await fetchData(HEROES_URL, { page, size });
+        const params = { page, size };
+        if (activeFilter) {
+            params.surname_first_letter = activeFilter;
+        }
+        const heroesData = await fetchData(HEROES_URL, params);
         if (!heroesData || !heroesData.items) {
             console.error('No hero data received');
             return;
@@ -39,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             imageDiv.className = 'hero-card__image';
             const img = document.createElement('img');
             const hasPhoto = hero.photo_name && hero.photo_name.trim() !== '';
-            img.src = hasPhoto ? `${PHOTO_BASE_URL}${hero.hero_id}/photo` : '../src/assets/photo/soldier.svg';
+            img.src = hasPhoto ? `${PHOTO_BASE_URL}${hero.hero_id}/photo` : 'assets/photo/soldier.svg';
             img.alt = hasPhoto ? `Photo of ${hero.surname} ${hero.name}` : '';
             imageDiv.appendChild(img);
 
@@ -51,10 +58,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             name.textContent = `${hero.surname} ${hero.name} ${hero.patronymic || ''}`.trim();
             const location = document.createElement('p');
             location.className = 'hero-card__location';
-            location.textContent = hero.birth_place || '';
+            location.textContent = hero.birth_place && hero.birth_place.trim() !== '' ? hero.birth_place : 'Место рождения: Не указано';
             const details = document.createElement('p');
             details.className = 'hero-card__details';
-            details.innerHTML = `${getWarTitle(hero.war_id)}, <br>${getYear(hero.birth_date)} - ${getYear(hero.death_date)}`;
+            const birthYear = getYear(hero.birth_date);
+            const deathYear = getYear(hero.death_date);
+            const lifeYears = birthYear || deathYear ? `Годы жизни: ${birthYear || '?'} - ${deathYear || '?'}` : 'Годы жизни: Не указано';
+            details.innerHTML = `${getWarTitle(hero.war_id)}, <br>${lifeYears}`;
 
             infoDiv.appendChild(name);
             infoDiv.appendChild(location);
@@ -96,6 +106,38 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Gallery container (#hero-gallery) not found');
         return;
     }
+
+    // Dynamically create individual letter elements
+    const alphabet = 'А Б В Г Д Е Ё Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Э Ю Я'.split(' ');
+    alphabetFilter.innerHTML = ''; // Clear existing content
+    alphabet.forEach(letter => {
+        const span = document.createElement('span');
+        span.textContent = letter;
+        span.className = 'filter-letter';
+        alphabetFilter.appendChild(span);
+    });
+
+    // Add click event for alphabet filter
+    alphabetFilter.addEventListener('click', (e) => {
+        const letterSpan = e.target.closest('.filter-letter');
+        if (letterSpan) {
+            const letter = letterSpan.textContent.trim();
+            if (activeFilter === letter) {
+                activeFilter = null; // Toggle off
+                activeLetterSpan.classList.remove('active'); // Remove active class
+                activeLetterSpan = null;
+            } else {
+                if (activeLetterSpan) {
+                    activeLetterSpan.classList.remove('active'); // Remove active from previous letter
+                }
+                activeFilter = letter; // Toggle on
+                activeLetterSpan = letterSpan;
+                activeLetterSpan.classList.add('active'); // Add active class
+                currentPage = 1; // Reset to first page on new filter
+            }
+            refreshGallery(currentPage, currentSize);
+        }
+    });
 
     // Initial load
     await refreshGallery(currentPage, currentSize);

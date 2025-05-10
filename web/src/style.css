@@ -1319,13 +1319,15 @@
         .history-controls__filter {
             text-align: left;
         }
-        .history-controls__filter span {
+        
+        .history-controls__filter .filter-letter {
             cursor: pointer;
             padding: 0 5px;
             transition: color 0.3s ease;
         }
-        .history-controls__filter span:hover,
-        .history-controls__filter span.active {
+        
+        .history-controls__filter .filter-letter:hover,
+        .history-controls__filter .filter-letter.active {
             color: #FF4500;
         }
 
