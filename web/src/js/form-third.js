@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const senderEmailInput = document.getElementById('sender_email');
     const errorMessage = document.getElementById('error-message');
     const errorText = document.getElementById('error-text');
-    const cyrillicPattern = /^[А-Яа-я\s]+$/;
+    const successModal = document.getElementById('successModal');
+    const cyrillicPattern = /^[А-Яа-я\s-.,]+$/;
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     function showError(message) {
@@ -17,6 +18,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 10000);
     }
 
+    function showSuccessModal() {
+        successModal.style.display = 'block';
+        setTimeout(() => {
+            successModal.style.display = 'none';
+            window.location.href = 'index.html';
+        }, 5000);
+        successModal.querySelector('.modal-close').addEventListener('click', () => {
+            successModal.style.display = 'none';
+        });
+    }
+
     // Clear error message on input
     [additionalInfoInput, senderNameInput, senderEmailInput].forEach(input => {
         input.addEventListener('input', () => {
@@ -25,9 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Validate Cyrillic input in real-time for additional_information
-    additionalInfoInput.addEventListener('input', () => {
-        additionalInfoInput.value = additionalInfoInput.value.replace(/[^А-Яа-я\s]/g, '');
+    // Validate Cyrillic input in real-time for additional_information and sender_name
+    [additionalInfoInput, senderNameInput].forEach(input => {
+        input.addEventListener('input', () => {
+            input.value = input.value.replace(/[^А-Яа-я\s-.,]/g, '');
+        });
     });
 
     // Restore form data from localStorage
@@ -78,14 +92,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Validate additional_information
         if (additionalInfo && !cyrillicPattern.test(additionalInfo)) {
-            showError('Пожалуйста, используйте только русские буквы в поле "Дополнительная информация".');
+            showError('Пожалуйста, используйте только русские буквы и символы (-.,) в поле "Дополнительная информация".');
             additionalInfoInput.classList.add('is-invalid');
             return;
         }
 
         // Validate sender_name (if provided)
         if (senderName && !cyrillicPattern.test(senderName)) {
-            showError('Пожалуйста, используйте только русские буквы в поле "Имя отправителя".');
+            showError('Пожалуйста, используйте только русские буквы и символы (-.,) в поле "Имя отправителя".');
             senderNameInput.classList.add('is-invalid');
             return;
         }
@@ -148,12 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (response.status === 201 || response.status === 200) {
                 localStorage.clear();
-                const successModal = document.getElementById('successModal');
-                successModal.style.display = 'block';
-                setTimeout(() => {
-                    successModal.style.display = 'none';
-                    window.location.href = 'index.html';
-                }, 5000);
+                showSuccessModal();
             }
         } catch (error) {
             console.error('Ошибка при отправке данных:', error);

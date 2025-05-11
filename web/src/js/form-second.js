@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const warInput = document.getElementById('war');
     const errorMessage = document.getElementById('error-message');
     const errorText = document.getElementById('error-text');
-    const cyrillicPattern = /^[А-Яа-я\s]+$/;
+    const cyrillicPattern = /^[А-Яа-я\s-.,]+$/;
     const yearPattern = /^(19|20)\d{2}$/;
     const serviceYearsPattern = /^(19|20)\d{2}-(19|20)\d{2}$/;
     let submissionAttempt = 0;
@@ -41,6 +41,13 @@ document.addEventListener('DOMContentLoaded', () => {
         select.addEventListener('change', () => {
             errorMessage.style.display = 'none';
             select.classList.remove('is-invalid');
+        });
+    });
+
+    // Validate Cyrillic input in real-time for birth_place and military_specialty
+    [birthPlaceInput, militarySpecialtyInput].forEach(input => {
+        input.addEventListener('input', () => {
+            input.value = input.value.replace(/[^А-Яа-я\s-.,]/g, '');
         });
     });
 
@@ -76,7 +83,9 @@ document.addEventListener('DOMContentLoaded', () => {
             january: '01', february: '02', march: '03', april: '04', may: '05', june: '06',
             july: '07', august: '08', september: '09', october: '10', november: '11', december: '12'
         };
-        const mm = map[month] || '01';
+        constទ
+
+    const mm = map[month] || '01';
         const dd = day.padStart(2, '0');
         return `${year}-${mm}-${dd}`;
     }
@@ -158,15 +167,15 @@ document.addEventListener('DOMContentLoaded', () => {
             warInput.classList.add('is-invalid');
         }
 
-        // Validate birth place (optional, Cyrillic only)
+        // Validate birth place (optional, Cyrillic and punctuation only)
         if (birthPlace && !cyrillicPattern.test(birthPlace)) {
-            errors.push('Пожалуйста, используйте только русские буквы в поле "Место рождения".');
+            errors.push('Пожалуйста, используйте только русские буквы и символы (-.,) в поле "Место рождения".');
             birthPlaceInput.classList.add('is-invalid');
         }
 
-        // Validate military specialty (optional, Cyrillic only)
+        // Validate military specialty (optional, Cyrillic and punctuation only)
         if (militarySpecialty && !cyrillicPattern.test(militarySpecialty)) {
-            errors.push('Пожалуйста, используйте только русские буквы в поле "Воинская специальность".');
+            errors.push('Пожалуйста, используйте только русские буквы и символы (-.,) в поле "Воинская специальность".');
             militarySpecialtyInput.classList.add('is-invalid');
         }
 
@@ -207,9 +216,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (errors.length > 0) {
             let errorMessageText;
             if (submissionAttempt === 1 && (errors.some(e => e.includes('русские буквы')))) {
-                errorMessageText = 'Пожалуйста, используйте только русские буквы в полях текста.';
+                errorMessageText = 'Пожалуйста, используйте только русские буквы и символы (-.,) в полях текста.';
             } else {
-                errorMessageText = 'Проверьте корректность дат рождения и смерти, а также удостоверьтесь в вводе ТОЛЬКО русских символов.';
+                errorMessageText = 'Проверьте корректность дат рождения и смерти, а также удостоверьтесь в вводе ТОЛЬКО русских символов и знаков (-.,).';
             }
             showError(errorMessageText);
             return;
